@@ -15,7 +15,7 @@ class MainWindow(QMainWindow):
 
         # Initialize views
         self.views = [
-            {"name": "Geometry View", "widget": Geometry()},
+            {"name": "Geometry", "widget": Geometry()},
         ]
 
         self.view_mapping = {}
