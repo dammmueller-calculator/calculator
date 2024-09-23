@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+dynamic = ["version"]
+name = "calculator"
+readme = "README.md"
+dependencies = [
+    "tomllib",
+    "PyQt6",
+    "PyQt6-Qt6",
+]
+authors = [
+    {name = "Celine Träber", email = "i22traeberce@bszetdd.lernsax.de"},
+    {name = "Florian Mros", email = "mail@floork.dev"},
+    {name = "Stefan Klaeck", email = "i22klaeckst@bszetdd.lernsax.de"},
+    {name = "Ricardo Thiele", email = "i22thieleri@bszetdd.lernsax.de"},
+]
