@@ -7,7 +7,6 @@ dynamic = ["version"]
 name = "calculator"
 readme = "README.md"
 dependencies = [
-    "tomllib",
     "PyQt6",
     "PyQt6-Qt6",
 ]
