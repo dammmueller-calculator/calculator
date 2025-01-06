@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>417</width>
+    <height>311</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QComboBox" name="combox_branchFunctionSelect">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>10</y>
+     <width>121</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>Select Function</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Prozent Zu</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Prozent Weg</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Prozent Von</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Prozentsatz</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Brutto aus Netto</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Netto aus Brutto</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLabel" name="la_firstInput">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>60</y>
+     <width>101</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="la_secondInput">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>100</y>
+     <width>101</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPlainTextEdit" name="tb_firstInput">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>60</y>
+     <width>121</width>
+     <height>31</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPlainTextEdit" name="tb_secondInput">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>100</y>
+     <width>121</width>
+     <height>31</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="la_result">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>170</y>
+     <width>101</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Ergebnis:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="la_resultOutput">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>170</y>
+     <width>101</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>combox_branchFunctionSelect</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>Form</receiver>
+   <slot>handleLabelsOnSelectChange()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>112</x>
+     <y>14</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>210</x>
+     <y>12</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>handleLabelsOnSelectChange()</slot>
+ </slots>
+</ui>
