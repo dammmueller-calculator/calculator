@@ -275,5 +275,246 @@
   </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>number1()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>104</x>
+     <y>153</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>42</x>
+     <y>152</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_10</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>number2()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>171</x>
+     <y>152</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>135</x>
+     <y>123</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_3</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>number3()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>234</x>
+     <y>156</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>206</x>
+     <y>121</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>number4()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>99</x>
+     <y>239</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>63</x>
+     <y>194</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_11</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>number5()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>159</x>
+     <y>250</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>135</x>
+     <y>195</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_6</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>number6()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>245</x>
+     <y>236</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>206</x>
+     <y>196</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_4</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>number7()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>104</x>
+     <y>299</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>64</x>
+     <y>264</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_13</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>number8()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>166</x>
+     <y>296</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>135</x>
+     <y>266</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_5</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>number9()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>252</x>
+     <y>299</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>206</x>
+     <y>264</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_16</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>number0()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>183</x>
+     <y>371</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>207</x>
+     <y>404</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_22</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>plus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>315</x>
+     <y>89</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>356</x>
+     <y>87</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_23</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>minus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>313</x>
+     <y>150</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>357</x>
+     <y>156</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_24</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>multipli()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>319</x>
+     <y>232</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>355</x>
+     <y>225</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_25</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>divide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>311</x>
+     <y>305</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>362</x>
+     <y>298</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>number1()</slot>
+  <slot>number2()</slot>
+  <slot>number3()</slot>
+  <slot>number4()</slot>
+  <slot>number5()</slot>
+  <slot>number6()</slot>
+  <slot>number7()</slot>
+  <slot>number8()</slot>
+  <slot>number9()</slot>
+  <slot>number0()</slot>
+  <slot>plus()</slot>
+  <slot>minus()</slot>
+  <slot>divide()</slot>
+  <slot>multipli()</slot>
+ </slots>
 </ui>
