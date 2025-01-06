@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>417</width>
-    <height>311</height>
+    <width>645</width>
+    <height>521</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -128,6 +128,16 @@
    </property>
    <property name="text">
     <string/>
+   </property>
+  </widget>
+  <widget class="QWidget" name="wi_inputModule" native="true">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>210</y>
+     <width>581</width>
+     <height>281</height>
+    </rect>
    </property>
   </widget>
  </widget>
