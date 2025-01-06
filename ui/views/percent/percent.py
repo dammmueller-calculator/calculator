@@ -1,5 +1,6 @@
 from PyQt6 import uic
 from PyQt6.QtWidgets import QWidget, QVBoxLayout
+import re
 from ui.views.InputModul import InputModul
 from src.percent.percent import PercentLib
 
@@ -12,7 +13,7 @@ class Percent(QWidget):
         layout = QVBoxLayout()
         input_widget.setLayout(layout)
         self.input_module = InputModul()
-        layout.addWidget(self.inputModule)
+        layout.addWidget(self.input_module)
         # self.inputModule.number_pressed.connect()
 
     def handle_labels_on_select_change(self):
@@ -35,10 +36,15 @@ class Percent(QWidget):
 
     def handle_result_on_signal(self):
         index = self.combox_branch_function_select.currentIndex()
-        first_value = self.tb_first_input.text()
-        second_value = self.tb_second_input.text()
+        first_value = self.tb_first_input.toPlainText()
+        second_value = self.tb_second_input.toPlainText()
+
+        if re.search('^-.*$', second_value):
+            print("Don't use negative percentages")
+            return
+
         if index == 1:
-            PercentLib.add_percentage(PercentLib(), first_value, second_value)
+            self.la_result_output.setText(PercentLib.add_percentage(PercentLib(), float(first_value), float(second_value)))
         elif index == 2:
             print("")
         elif index == 3:
@@ -46,8 +52,12 @@ class Percent(QWidget):
         elif index == 4:
             print("")
         elif index == 5:
-            print("")
+            if re.search('^-.*$', first_value):
+                print("Don't use negative percentages")
+                return
         elif index == 6:
-            print("")
+            if re.search('^-.*$', first_value):
+                print("Don't use negative percentages")
+                return
         else:
             print("Please select a branch function first")

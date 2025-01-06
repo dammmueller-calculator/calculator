@@ -2,10 +2,11 @@ class PercentLib:
     def __init__(self):
         super().__init__()
 
-    def add_percentage(self, fundamentalValue: float, percentage: float):
-        print("")
+    def add_percentage(self, fundamental_value: float, percentage: float):
+        added_percentage = fundamental_value + (fundamental_value * (percentage / 100))
+        return str(added_percentage)
 
-    def substract_percentage(self):
+    def subtract_percentage(self):
         print("")
 
     def percent_of(self):

@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QComboBox" name="combox_branchFunctionSelect">
+  <widget class="QComboBox" name="combox_branch_function_select">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -58,7 +58,7 @@
     </property>
    </item>
   </widget>
-  <widget class="QLabel" name="la_firstInput">
+  <widget class="QLabel" name="la_first_input">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -71,7 +71,7 @@
     <string/>
    </property>
   </widget>
-  <widget class="QLabel" name="la_secondInput">
+  <widget class="QLabel" name="la_second_input">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -84,7 +84,7 @@
     <string/>
    </property>
   </widget>
-  <widget class="QPlainTextEdit" name="tb_firstInput">
+  <widget class="QPlainTextEdit" name="tb_first_input">
    <property name="geometry">
     <rect>
      <x>120</x>
@@ -94,7 +94,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QPlainTextEdit" name="tb_secondInput">
+  <widget class="QPlainTextEdit" name="tb_second_input">
    <property name="geometry">
     <rect>
      <x>120</x>
@@ -117,7 +117,7 @@
     <string>Ergebnis:</string>
    </property>
   </widget>
-  <widget class="QLabel" name="la_resultOutput">
+  <widget class="QLabel" name="la_result_output">
    <property name="geometry">
     <rect>
      <x>120</x>
@@ -140,14 +140,27 @@
     </rect>
    </property>
   </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>100</y>
+     <width>75</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>PushButton</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections>
   <connection>
-   <sender>combox_branchFunctionSelect</sender>
+   <sender>combox_branch_function_select</sender>
    <signal>currentIndexChanged(int)</signal>
    <receiver>Form</receiver>
-   <slot>handleLabelsOnSelectChange()</slot>
+   <slot>handle_labels_on_select_change()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>112</x>
@@ -159,8 +172,25 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>handle_result_on_signal()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>299</x>
+     <y>107</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>266</x>
+     <y>57</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
-  <slot>handleLabelsOnSelectChange()</slot>
+  <slot>handle_labels_on_select_change()</slot>
+  <slot>handle_result_on_signal()</slot>
  </slots>
 </ui>
