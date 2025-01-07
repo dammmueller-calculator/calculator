@@ -66,7 +66,7 @@ class InputModul(QWidget):
         self.sign_pressed.emit(',')
 
     def bracketOpen(self):
-        self.sign_pressed.emit('(')
+        self.sign_pressed.emit('(')       
 
     def bracketClose(self):
         self.sign_pressed.emit(')')    

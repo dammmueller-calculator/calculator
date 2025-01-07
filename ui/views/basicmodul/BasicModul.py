@@ -18,6 +18,7 @@ class BasicModul(QWidget):
         layout.addWidget(self.input_modul)
 
         self.input_modul.number_pressed.connect(self.update_inputLine)
+        self.input_modul.sign_pressed.connect(self.update_inputLine)
 
     def update_inputLine(self, value):
         text = self.inputLine.text()
