@@ -1,12 +1,11 @@
 from PyQt6 import uic
 from PyQt6.QtWidgets import QWidget, QVBoxLayout
-from ui.views.InputModul import InputModul
+from ui.views.InputModule import InputModule
 
-
-class BasicModul(QWidget):
+class BasicModule(QWidget):
     def __init__(self):
         super().__init__()
-        uic.loadUi("ui/views/BasicModul/BasicModul.ui", self)
+        uic.loadUi("ui/views/BasicModule/BasicModule.ui", self)
         ("background-color: lightblue;")  # Temporary visual indicator
 
         inputWidget = self.findChild(QWidget, "InputModul")
@@ -14,11 +13,11 @@ class BasicModul(QWidget):
         layout = QVBoxLayout()
         inputWidget.setLayout(layout)
 
-        self.input_modul = InputModul()
-        layout.addWidget(self.input_modul)
+        self.input_module = InputModule()
+        layout.addWidget(self.input_module)
 
-        self.input_modul.number_pressed.connect(self.update_inputLine)
-        self.input_modul.sign_pressed.connect(self.update_inputLine)
+        self.input_module.number_pressed.connect(self.update_inputLine)
+        self.input_module.sign_pressed.connect(self.update_inputLine)
 
     def update_inputLine(self, value):
         text = self.inputLine.text()

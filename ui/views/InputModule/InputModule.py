@@ -2,13 +2,13 @@ from PyQt6 import uic
 from PyQt6.QtWidgets import QWidget
 from PyQt6.QtCore import pyqtSignal
 
-class InputModul(QWidget):    
+class InputModule(QWidget):    
     number_pressed = pyqtSignal(str)  
     sign_pressed = pyqtSignal(str)       
   
     def __init__(self):
         super().__init__()
-        uic.loadUi("ui/views/InputModul/InputModul.ui", self)
+        uic.loadUi("ui/views/InputModule/InputModule.ui", self)
         ("background-color: lightblue;")  # Temporary visual indicator
              
     def number1(self):
