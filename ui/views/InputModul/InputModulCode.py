@@ -41,16 +41,32 @@ class InputModul(QWidget):
     def number0(self):
         self.number_pressed.emit('0')
 
-    def numberPlus(self):
+    def plus(self):
         self.sign_pressed.emit('+')
 
-    def numberMinus(self):
+    def minus(self):
         self.sign_pressed.emit('-')
 
-    def numberMultiply(self):
+    def multiply(self):
         self.sign_pressed.emit('*')
 
-    def numberDivide(self):
+    def divide(self):
         self.sign_pressed.emit('/')
 
-        
+    def equal(self):
+        self.sign_pressed.emit('=')
+
+    def clear(self):
+        self.sign_pressed.emit('C')
+
+    def dot(self):
+        self.sign_pressed.emit('.')
+
+    def comma(self):
+        self.sign_pressed.emit(',')
+
+    def bracketOpen(self):
+        self.sign_pressed.emit('(')
+
+    def bracketClose(self):
+        self.sign_pressed.emit(')')    
