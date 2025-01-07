@@ -5,8 +5,7 @@ from ui.views.InputModule import InputModule
 class BasicModule(QWidget):
     def __init__(self):
         super().__init__()
-        uic.loadUi("ui/views/BasicModule/BasicModule.ui", self)
-        ("background-color: lightblue;")  # Temporary visual indicator
+        uic.loadUi("ui/views/BasicModule/BasicModule.ui", self)      
 
         inputWidget = self.findChild(QWidget, "InputModul")
       

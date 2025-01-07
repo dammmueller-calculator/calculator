@@ -8,8 +8,7 @@ class InputModule(QWidget):
   
     def __init__(self):
         super().__init__()
-        uic.loadUi("ui/views/InputModule/InputModule.ui", self)
-        ("background-color: lightblue;")  # Temporary visual indicator
+        uic.loadUi("ui/views/InputModule/InputModule.ui", self)      
              
     def number1(self):
         self.number_pressed.emit('1')
