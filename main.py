@@ -3,7 +3,7 @@ from PyQt6.QtWidgets import QStackedWidget, QListWidget, QMainWindow, QListWidge
 
 # Import your view modules
 from ui.views.geometry import Geometry
-from ui.views.InputModul import InputModul
+from ui.views.BasicModule import BasicModule
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -16,7 +16,7 @@ class MainWindow(QMainWindow):
         # Initialize views
         self.views = [
             {"name": "Geometry", "widget": Geometry()},
-            {"name": "InputModul", "widget": InputModul()},
+            {"name": "Basic Module", "widget": BasicModule()},
         ]
 
         self.view_mapping = {}
