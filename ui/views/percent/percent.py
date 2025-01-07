@@ -2,7 +2,7 @@ from PyQt6 import uic
 from PyQt6.QtWidgets import QWidget, QVBoxLayout
 import re
 from ui.views.InputModul import InputModul
-from src.percent.percent import PercentLib
+from src.percent.percent import *
 
 
 class Percent(QWidget):
@@ -42,22 +42,27 @@ class Percent(QWidget):
         if re.search('^-.*$', second_value):
             print("Don't use negative percentages")
             return
+        if not second_value or not first_value:
+            print("Please enter all values")
+            return
 
         if index == 1:
-            self.la_result_output.setText(PercentLib.add_percentage(PercentLib(), float(first_value), float(second_value)))
+            self.la_result_output.setText(add_percentage(float(first_value), float(second_value))[0])
         elif index == 2:
-            print("")
+            self.la_result_output.setText(subtract_percentage(float(first_value), float(second_value))[0])
         elif index == 3:
-            print("")
+            self.la_result_output.setText(percent_of(float(first_value), float(second_value))[0])
         elif index == 4:
-            print("")
+            self.la_result_output.setText(percentage(float(first_value), float(second_value))[0])
         elif index == 5:
             if re.search('^-.*$', first_value):
-                print("Don't use negative percentages")
+                print("Don't use negative values")
                 return
+            self.la_result_output.setText(gross_of_net(float(first_value), float(second_value))[0])
         elif index == 6:
             if re.search('^-.*$', first_value):
-                print("Don't use negative percentages")
+                print("Don't use negative values")
                 return
+            self.la_result_output.setText(net_of_gross(float(first_value), float(second_value))[0])
         else:
             print("Please select a branch function first")
