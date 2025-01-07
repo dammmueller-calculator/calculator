@@ -7,33 +7,30 @@
     <x>0</x>
     <y>0</y>
     <width>812</width>
-    <height>565</height>
+    <height>625</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QLineEdit" name="lineEdit">
+  <widget class="QLineEdit" name="inputLine">
    <property name="geometry">
     <rect>
      <x>60</x>
      <y>50</y>
-     <width>691</width>
+     <width>501</width>
      <height>51</height>
     </rect>
    </property>
   </widget>
-  <widget class="QGroupBox" name="groupBox">
+  <widget class="QWidget" name="InputModul" native="true">
    <property name="geometry">
     <rect>
      <x>60</x>
-     <y>110</y>
-     <width>691</width>
-     <height>411</height>
+     <y>130</y>
+     <width>501</width>
+     <height>381</height>
     </rect>
-   </property>
-   <property name="title">
-    <string>GroupBox</string>
    </property>
   </widget>
  </widget>
