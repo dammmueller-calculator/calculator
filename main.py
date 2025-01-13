@@ -23,7 +23,6 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
         uic.loadUi("ui/main_window.ui", self)
-        self.showHistory()
 
         self.menu_frame = self.findChild(QFrame, "menuFrame")
         self.stacked_widget = self.findChild(QStackedWidget, "modules")
