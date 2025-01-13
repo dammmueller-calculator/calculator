@@ -1,21 +1,29 @@
 from PyQt6 import QtWidgets, uic
 from PyQt6.QtWidgets import QStackedWidget, QMainWindow, QPushButton, QVBoxLayout, QFrame
+from PyQt6.QtCore import QStringListModel
 
 # Import your view modules
 from ui.views.geometry import Geometry
 from ui.views.BasicModule import BasicModule
 
+# Import Source
+from src.history import encrypt_file, decrypt_file
+
 class MainWindow(QMainWindow):
+    key = b"mysecretkey12345"
+    history = []
+
     def __init__(self):
         super(MainWindow, self).__init__()
         uic.loadUi("ui/main_window.ui", self)
+        self.showHistory()
 
         self.menu_frame = self.findChild(QFrame, "menuFrame")
         self.stacked_widget = self.findChild(QStackedWidget, "modules")
 
         # Initialize views
         self.views = [
-            {"name": "Geometry", "widget": Geometry()},
+            {"name": "Geometry", "widget": Geometry(self)},
             {"name": "Basic Module", "widget": BasicModule()},
         ]
 
@@ -54,9 +62,24 @@ class MainWindow(QMainWindow):
                 self.stacked_widget.setCurrentIndex(index)
         return switch_view
 
+    def showHistory(self):
+        self.history = decrypt_file("history.txt", self.key)
+        model = QStringListModel(self.history)
+        self.historyList.setModel(model)
+
+    def appendHistory(self, expression):
+        self.history.append(expression)
+        model = QStringListModel(self.history)
+        self.historyList.setModel(model)
+
+
+    def finalizeHistory(self):
+        encrypt_file(self.history, self.key)
+
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
     window = MainWindow()
     window.show()
     app.exec()
+    window.finalizeHistory()

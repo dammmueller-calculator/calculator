@@ -52,7 +52,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
        <set>Qt::TextInteractionFlag::NoTextInteraction</set>
       </property>
      </widget>
-     <widget class="QListView" name="listView">
+     <widget class="QListView" name="historyList">
       <property name="geometry">
        <rect>
         <x>15</x>
