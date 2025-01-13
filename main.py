@@ -13,6 +13,9 @@ from ui.views.settings import Settings
 # Import Source
 from src.history import encrypt_file, decrypt_file
 
+# Import Source
+from src.history import encrypt_file, decrypt_file
+
 class MainWindow(QMainWindow):
     key = b"mysecretkey12345"
     history = []
@@ -20,6 +23,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
         uic.loadUi("ui/main_window.ui", self)
+        self.showHistory()
 
         self.menu_frame = self.findChild(QFrame, "menuFrame")
         self.stacked_widget = self.findChild(QStackedWidget, "modules")
