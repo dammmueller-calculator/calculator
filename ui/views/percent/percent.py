@@ -1,5 +1,5 @@
 from PyQt6 import uic
-from PyQt6.QtWidgets import QWidget, QVBoxLayout
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QApplication
 import re
 from ui.views.InputModule import InputModule
 from src.percent.percent import *
@@ -15,10 +15,20 @@ class Percent(QWidget):
         self.input_module = InputModule()
         layout.addWidget(self.input_module)
 
-        self.input_module.number_pressed.connect(self.update_input_line())
-        self.input_module.sign_pressed.connect(self.update_input_line())
+        self.last_focused_edit = None
 
-    # def update_input_line(self):
+        self.input_module.number_pressed.connect(self.update_input_line)
+        self.input_module.sign_pressed.connect(self.handle_result_on_signal)
+
+    def find_last_selected_text_edit(self):
+        if QApplication.focusWidget() == self.tb_first_input:
+            self.last_focused_edit = self.tb_first_input
+        if QApplication.focusWidget() == self.tb_second_input:
+            self.last_focused_edit = self.tb_second_input
+
+    def update_input_line(self, value):
+        text = self.last_focused_edit.toPlainText()
+        self.last_focused_edit.setPlainText(text + value)
 
     def handle_labels_on_select_change(self):
         index = self.combox_branch_function_select.currentIndex()
@@ -38,35 +48,38 @@ class Percent(QWidget):
             self.la_first_input.setText("")
             self.la_second_input.setText("")
 
-    def handle_result_on_signal(self):
-        index = self.combox_branch_function_select.currentIndex()
-        first_value = self.tb_first_input.toPlainText()
-        second_value = self.tb_second_input.toPlainText()
+    def handle_result_on_signal(self, value):
+        if value == '=':
+            index = self.combox_branch_function_select.currentIndex()
+            first_value = self.tb_first_input.toPlainText()
+            second_value = self.tb_second_input.toPlainText()
 
-        if re.search('^-.*$', second_value):
-            print("Don't use negative percentages")
-            return
-        if not second_value or not first_value:
-            print("Please enter all values")
-            return
+            if re.search('^-.*$', second_value):
+                print("Don't use negative percentages")
+                return
+            if not second_value or not first_value:
+                print("Please enter all values")
+                return
 
-        if index == 1:
-            self.la_result_output.setText(add_percentage(float(first_value), float(second_value))[0])
-        elif index == 2:
-            self.la_result_output.setText(subtract_percentage(float(first_value), float(second_value))[0])
-        elif index == 3:
-            self.la_result_output.setText(percent_of(float(first_value), float(second_value))[0])
-        elif index == 4:
-            self.la_result_output.setText(percentage(float(first_value), float(second_value))[0])
-        elif index == 5:
-            if re.search('^-.*$', first_value):
-                print("Don't use negative values")
-                return
-            self.la_result_output.setText(gross_of_net(float(first_value), float(second_value))[0])
-        elif index == 6:
-            if re.search('^-.*$', first_value):
-                print("Don't use negative values")
-                return
-            self.la_result_output.setText(net_of_gross(float(first_value), float(second_value))[0])
+            if index == 1:
+                self.la_result_output.setText(add_percentage(float(first_value), float(second_value))[0])
+            elif index == 2:
+                self.la_result_output.setText(subtract_percentage(float(first_value), float(second_value))[0])
+            elif index == 3:
+                self.la_result_output.setText(percent_of(float(first_value), float(second_value))[0])
+            elif index == 4:
+                self.la_result_output.setText(percentage(float(first_value), float(second_value))[0])
+            elif index == 5:
+                if re.search('^-.*$', first_value):
+                    print("Don't use negative values")
+                    return
+                self.la_result_output.setText(gross_of_net(float(first_value), float(second_value))[0])
+            elif index == 6:
+                if re.search('^-.*$', first_value):
+                    print("Don't use negative values")
+                    return
+                self.la_result_output.setText(net_of_gross(float(first_value), float(second_value))[0])
+            else:
+                print("Please select a branch function first")
         else:
-            print("Please select a branch function first")
+            return

@@ -6,9 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>645</width>
-    <height>521</height>
+    <width>626</width>
+    <height>765</height>
    </rect>
+  </property>
+  <property name="focusPolicy">
+   <enum>Qt::ClickFocus</enum>
   </property>
   <property name="windowTitle">
    <string>Form</string>
@@ -84,32 +87,6 @@
     <string/>
    </property>
   </widget>
-  <widget class="QPlainTextEdit" name="tb_first_input">
-   <property name="geometry">
-    <rect>
-     <x>120</x>
-     <y>60</y>
-     <width>121</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="tabChangesFocus">
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QPlainTextEdit" name="tb_second_input">
-   <property name="geometry">
-    <rect>
-     <x>120</x>
-     <y>100</y>
-     <width>121</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="tabChangesFocus">
-    <bool>true</bool>
-   </property>
-  </widget>
   <widget class="QLabel" name="la_result">
    <property name="geometry">
     <rect>
@@ -142,21 +119,28 @@
      <x>20</x>
      <y>210</y>
      <width>581</width>
-     <height>281</height>
+     <height>511</height>
     </rect>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPlainTextEdit" name="tb_first_input">
    <property name="geometry">
     <rect>
-     <x>280</x>
-     <y>100</y>
-     <width>75</width>
-     <height>24</height>
+     <x>120</x>
+     <y>60</y>
+     <width>111</width>
+     <height>31</height>
     </rect>
    </property>
-   <property name="text">
-    <string>PushButton</string>
+  </widget>
+  <widget class="QPlainTextEdit" name="tb_second_input">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>100</y>
+     <width>111</width>
+     <height>31</height>
+    </rect>
    </property>
   </widget>
  </widget>
@@ -179,24 +163,42 @@
    </hints>
   </connection>
   <connection>
-   <sender>pushButton</sender>
-   <signal>clicked()</signal>
+   <sender>tb_first_input</sender>
+   <signal>selectionChanged()</signal>
    <receiver>Form</receiver>
-   <slot>handle_result_on_signal()</slot>
+   <slot>find_last_selected_text_edit()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>299</x>
-     <y>107</y>
+     <x>191</x>
+     <y>75</y>
     </hint>
     <hint type="destinationlabel">
-     <x>266</x>
-     <y>57</y>
+     <x>334</x>
+     <y>89</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tb_second_input</sender>
+   <signal>selectionChanged()</signal>
+   <receiver>Form</receiver>
+   <slot>find_last_selected_text_edit()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>203</x>
+     <y>126</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>413</x>
+     <y>113</y>
     </hint>
    </hints>
   </connection>
  </connections>
  <slots>
+  <signal>focusInEvent()</signal>
   <slot>handle_labels_on_select_change()</slot>
   <slot>handle_result_on_signal()</slot>
+  <slot>find_last_selected_text_edit()</slot>
  </slots>
 </ui>
