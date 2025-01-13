@@ -4,6 +4,7 @@ from PyQt6.QtCore import QStringListModel
 
 # Import your view modules
 from ui.views.geometry import Geometry
+from ui.views.percent import Percent
 from ui.views.BasicModule import BasicModule
 
 # Import Source
@@ -23,8 +24,9 @@ class MainWindow(QMainWindow):
 
         # Initialize views
         self.views = [
-            {"name": "Geometry", "widget": Geometry(self)},
-            {"name": "Basic Module", "widget": BasicModule()},
+            {"name": "Geometry", "widget": Geometry()},
+            {"name": "Percent", "widget": Percent(self)},
+            {"name": "Basic Module", "widget": BasicModule()}
         ]
 
         self.view_mapping = {}
