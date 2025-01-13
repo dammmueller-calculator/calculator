@@ -1,6 +1,5 @@
 from PyQt6 import QtWidgets, uic
 from PyQt6.QtWidgets import QStackedWidget, QMainWindow, QPushButton, QVBoxLayout, QFrame
-from PyQt6.QtCore import QStringListModel
 
 # Import your view modules
 from ui.views.geometry import Geometry
