@@ -1,6 +1,5 @@
 from PyQt6 import QtWidgets, uic
-from PyQt6.QtWidgets import QStackedWidget, QMainWindow, QPushButton, QVBoxLayout, QFrame
-from PyQt6.QtCore import QStringListModel
+from PyQt6.QtWidgets import QMainWindow, QStackedWidget, QPushButton, QVBoxLayout, QFrame
 import tomllib
 import os
 
@@ -9,6 +8,7 @@ from ui.views.geometry import Geometry
 from ui.views.percent import Percent
 from ui.views.BasicModule import BasicModule
 from ui.views.settings import Settings
+from ui.views.startScreen import StartScreen
 
 # Import Source
 from src.history import encrypt_file, decrypt_file
@@ -27,8 +27,14 @@ class MainWindow(QMainWindow):
         self.menu_frame = self.findChild(QFrame, "menuFrame")
         self.stacked_widget = self.findChild(QStackedWidget, "modules")
 
-        # Initialize views
+        # Initialize the start screen widget (this will be the default screen)
+        self.start_screen = StartScreen(self.history)  # Pass history to start screen
+        self.stacked_widget.addWidget(self.start_screen)  # Add start screen as the first widget
+        self.view_mapping = {"Start Screen": 0}
+
+        # Add the start screen widget as one of the views
         self.views = [
+            {"name": "Start Screen", "widget": self.start_screen},
             {"name": "Geometry", "widget": Geometry()},
             {"name": "Percent", "widget": Percent(self)},
             {"name": "Basic Module", "widget": BasicModule()}
@@ -37,10 +43,10 @@ class MainWindow(QMainWindow):
         self.view_mapping = {}
         for view in self.views:
             self.stacked_widget.addWidget(view["widget"])
-            self.view_mapping[view["name"]] = self.stacked_widget.indexOf(
-                view["widget"]
-            )
+            self.view_mapping[view["name"]] = self.stacked_widget.indexOf(view["widget"])
 
+        # Add menu buttons dynamically (to switch between views)
+        self.stacked_widget.setCurrentWidget(self.start_screen)
         self.add_menu_buttons()
         self.ensure_connection()
 
@@ -48,17 +54,6 @@ class MainWindow(QMainWindow):
         self.settings_window.settngs_changed.connect(self.apply_settings)
         self.settings = self.settings_window.get_settings()
         self.showHistory()
-
-    def loadSettings(self):
-        if os.path.exists("settings.toml"):
-            with open("settings.toml", "rb") as f:
-                self.settings = tomllib.load(f)
-            return Settings(self.settings)
-        return Settings()
-
-    def ensure_connection(self):
-        """Method for ensuring connections if needed."""
-        pass
 
     def add_menu_buttons(self):
         """Create buttons dynamically and add them to the menu frame with minimal spacing."""
@@ -73,12 +68,6 @@ class MainWindow(QMainWindow):
 
         self.menu_frame.setLayout(layout)
 
-    def open_settings(self):
-        self.settings_window.show()
-
-    def apply_settings(self):
-        self.settings = self.settings_window.get_settings()
-
     def create_view_switcher(self, view_name):
         """Return a function to switch to a specific view."""
         def switch_view():
@@ -87,16 +76,31 @@ class MainWindow(QMainWindow):
                 self.stacked_widget.setCurrentIndex(index)
         return switch_view
 
+    def loadSettings(self):
+        if os.path.exists("settings.toml"):
+            with open("settings.toml", "rb") as f:
+                self.settings = tomllib.load(f)
+            return Settings(self.settings)
+        return Settings()
+
+    def ensure_connection(self):
+        """Method for ensuring connections if needed."""
+        pass
+
+    def open_settings(self):
+        self.settings_window.show()
+
+    def apply_settings(self):
+        self.settings = self.settings_window.get_settings()
+
+
     def showHistory(self):
         self.history = decrypt_file(self.settings["history_path"], self.settings["key"])
-        model = QStringListModel(self.history)
-        self.historyList.setModel(model)
+        self.start_screen.update_history(self.history)  # Update history in start screen
 
     def appendHistory(self, expression):
         self.history.append(expression)
-        model = QStringListModel(self.history)
-        self.historyList.setModel(model)
-
+        self.start_screen.update_history(self.history)  # Update history in start screen
 
     def finalizeHistory(self):
         print(f"history: {self.history}")
