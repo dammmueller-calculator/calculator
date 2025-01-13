@@ -25,7 +25,7 @@ class MainWindow(QMainWindow):
         # Initialize views
         self.views = [
             {"name": "Geometry", "widget": Geometry()},
-            {"name": "Percent", "widget": Percent()},
+            {"name": "Percent", "widget": Percent(self)},
             {"name": "Basic Module", "widget": BasicModule()}
         ]
 
