@@ -97,5 +97,25 @@ li.checked::marker { content: &quot;\2612&quot;; }
   </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>Calculator</receiver>
+   <slot>open_settings()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>69</x>
+     <y>15</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>103</x>
+     <y>5</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>open_settings()</slot>
+ </slots>
 </ui>
