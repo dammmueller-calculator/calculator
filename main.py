@@ -17,7 +17,6 @@ from src.history import encrypt_file, decrypt_file
 from src.history import encrypt_file, decrypt_file
 
 class MainWindow(QMainWindow):
-    key = b"mysecretkey12345"
     history = []
 
     def __init__(self):
@@ -103,9 +102,6 @@ class MainWindow(QMainWindow):
         self.start_screen.update_history(self.history)  # Update history in start screen
 
     def finalizeHistory(self):
-        print(f"history: {self.history}")
-        print(f"key: {self.settings['key']}")
-        print(f"history_path: {self.settings['history_path']}")
         encrypt_file(self.history, self.settings["key"], self.settings["history_path"])
 
     def finalize(self):
