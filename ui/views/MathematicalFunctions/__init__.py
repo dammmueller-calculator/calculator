@@ -1,1 +1,1 @@
-from mathematical_functions import MathmaticalFunctions
+from MathematicalFunctions import MathematicalFunctions

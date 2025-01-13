@@ -6,7 +6,7 @@ from PyQt6.QtCore import QStringListModel
 from ui.views.geometry import Geometry
 from ui.views.percent import Percent
 from ui.views.BasicModule import BasicModule
-from ui.views.MathematicalFunctions import MathmaticalFunctions
+from ui.views.MathematicalFunctions import MathematicalFunctions
 
 # Import Source
 from src.history import encrypt_file, decrypt_file
@@ -28,7 +28,7 @@ class MainWindow(QMainWindow):
             {"name": "Geometry", "widget": Geometry()},
             {"name": "Percent", "widget": Percent(self)},
             {"name": "Basic Module", "widget": BasicModule()},
-            {"name": "Mathmatical Functions", "widget": MathmaticalFunctions(self)}
+            {"name": "Mathematical Functions", "widget": MathematicalFunctions(self)}
         ]
 
         self.view_mapping = {}
