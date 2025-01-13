@@ -1,5 +1,5 @@
 from PyQt6 import QtWidgets, uic
-from PyQt6.QtWidgets import QStackedWidget, QListWidget, QMainWindow, QListWidgetItem
+from PyQt6.QtWidgets import QStackedWidget, QMainWindow, QPushButton, QVBoxLayout, QFrame
 
 # Import your view modules
 from ui.views.geometry import Geometry
@@ -10,7 +10,7 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__()
         uic.loadUi("ui/main_window.ui", self)
 
-        self.menu = self.findChild(QListWidget, "moduleList")
+        self.menu_frame = self.findChild(QFrame, "menuFrame")
         self.stacked_widget = self.findChild(QStackedWidget, "modules")
 
         # Initialize views
@@ -26,27 +26,33 @@ class MainWindow(QMainWindow):
                 view["widget"]
             )
 
-        self.add_menu_items()
+        self.add_menu_buttons()
         self.ensure_connection()
 
     def ensure_connection(self):
-        try:
-            self.menu.itemClicked.disconnect(self.display_view)
-        except TypeError:
-            pass
-        self.menu.itemClicked.connect(self.display_view)
+        """Method for ensuring connections if needed."""
+        pass
 
-    def add_menu_items(self):
-        self.menu.clear()
+    def add_menu_buttons(self):
+        """Create buttons dynamically and add them to the menu frame with minimal spacing."""
+        layout = QVBoxLayout(self.menu_frame)
+        layout.setSpacing(1)  # Set small spacing between buttons
+        layout.setContentsMargins(0, 0, 0, 0)  # Remove extra margins
+
         for view in self.views:
-            item = QListWidgetItem(view["name"])
-            self.menu.addItem(item)
+            button = QPushButton(view["name"], self)
+            button.clicked.connect(self.create_view_switcher(view["name"]))
+            layout.addWidget(button)
 
-    def display_view(self, item):
-        item_text = item.text()
-        index = self.view_mapping.get(item_text, -1)
-        if 0 <= index < self.stacked_widget.count():
-            self.stacked_widget.setCurrentIndex(index)
+        self.menu_frame.setLayout(layout)
+
+    def create_view_switcher(self, view_name):
+        """Return a function to switch to a specific view."""
+        def switch_view():
+            index = self.view_mapping.get(view_name, -1)
+            if 0 <= index < self.stacked_widget.count():
+                self.stacked_widget.setCurrentIndex(index)
+        return switch_view
 
 
 if __name__ == "__main__":
