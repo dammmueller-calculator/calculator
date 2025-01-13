@@ -15,6 +15,9 @@ class MathematicalFunctions(QWidget):
         layout = QVBoxLayout()
         input_widget.setLayout(layout)
 
+        self.tb_first_input.setVisibility(False)
+        self.tb_first_input.setVisibility(False)
+
         self.input_module = InputModule()
         layout.addWidget(self.input_module)
 
