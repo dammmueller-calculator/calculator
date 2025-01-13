@@ -30,6 +30,7 @@
           shellHook = ''
             export PYTHONPATH="${python3Packages.pyqt6}/${python3.sitePackages}:$PYTHONPATH"
             export LD_LIBRARY_PATH="${gcc}/lib:$LD_LIBRARY_PATH"
+            export QT_STYLE_OVERRIDE=windows
           '';
         };
       }
