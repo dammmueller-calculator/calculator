@@ -7,10 +7,10 @@ class BasicModule(QWidget):
         super().__init__()
         uic.loadUi("ui/views/BasicModule/BasicModule.ui", self)      
 
-        inputWidget = self.findChild(QWidget, "InputModul")
+        input_widget = self.findChild(QWidget, "InputModul")
       
         layout = QVBoxLayout()
-        inputWidget.setLayout(layout)
+        input_widget.setLayout(layout)
 
         self.input_module = InputModule()
         layout.addWidget(self.input_module)
