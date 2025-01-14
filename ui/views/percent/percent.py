@@ -19,25 +19,34 @@ class Percent(QWidget):
         self.input_module = InputModule()
         layout.addWidget(self.input_module)
 
+        self.tb_first_input.setVisible(False)
+        self.tb_second_input.setVisible(False)
+
         self.last_focused_edit = None
 
         self.input_module.number_pressed.connect(self.update_input_line)
         self.input_module.sign_pressed.connect(self.handle_signal)
 
     def find_last_selected_text_edit(self):
-        if QApplication.focusWidget() == self.tb_first_input:
-            self.last_focused_edit = self.tb_first_input
-        if QApplication.focusWidget() == self.tb_second_input:
-            self.last_focused_edit = self.tb_second_input
+        if self.combox_branch_function_select.currentIndex() != 0:
+            if QApplication.focusWidget() == self.tb_first_input:
+                self.last_focused_edit = self.tb_first_input
+            if QApplication.focusWidget() == self.tb_second_input:
+                self.last_focused_edit = self.tb_second_input
+        else:
+            return
 
     def update_input_line(self, value):
-        text = self.last_focused_edit.toPlainText()
-        self.last_focused_edit.setPlainText(text + value)
+        if self.combox_branch_function_select.currentIndex() != 0 and self.last_focused_edit:
+            text = self.last_focused_edit.toPlainText()
+            self.last_focused_edit.setPlainText(text + value)
+        else:
+            return
 
     def handle_signal(self, value):
         if value == "=":
             self.handle_result_on_signal()
-        elif value == "C":
+        if value == "C":
             self.tb_first_input.setPlainText("")
             self.tb_second_input.setPlainText("")
 
@@ -46,18 +55,28 @@ class Percent(QWidget):
         if (index == 1) or (index == 2) or (index == 3):
             self.la_first_input.setText("Grundwert")
             self.la_second_input.setText("Prozentsatz")
+            self.tb_first_input.setVisible(True)
+            self.tb_second_input.setVisible(True)
         elif index == 4:
             self.la_first_input.setText("Grundwert")
             self.la_second_input.setText("Prozentwert")
+            self.tb_first_input.setVisible(True)
+            self.tb_second_input.setVisible(True)
         elif index == 5:
             self.la_first_input.setText("Nettopreis")
             self.la_second_input.setText("Steuersatz")
+            self.tb_first_input.setVisible(True)
+            self.tb_second_input.setVisible(True)
         elif index == 6:
             self.la_first_input.setText("Bruttopreis")
             self.la_second_input.setText("Steuersatz")
+            self.tb_first_input.setVisible(True)
+            self.tb_second_input.setVisible(True)
         else:
             self.la_first_input.setText("")
             self.la_second_input.setText("")
+            self.tb_first_input.setVisible(False)
+            self.tb_second_input.setVisible(False)
 
     def handle_result_on_signal(self):
         result = ''
