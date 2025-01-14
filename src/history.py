@@ -3,6 +3,7 @@ import os
 def xor_encrypt_decrypt(data, key):
     """Encrypt or decrypt data using XOR."""
     result = bytearray()
+    key = key.encode('utf-8')  # Ensure the key is in bytes
     key_length = len(key)
     
     for i in range(len(data)):
