@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QWidget" name="widget" native="true">
+  <widget class="QWidget" name="wi_input_module" native="true">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -23,7 +23,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QComboBox" name="comboBox">
+  <widget class="QComboBox" name="combox_function_select">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -63,7 +63,7 @@
     </property>
    </item>
   </widget>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="la_first_input">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -76,7 +76,7 @@
     <string/>
    </property>
   </widget>
-  <widget class="QPlainTextEdit" name="plainTextEdit">
+  <widget class="QPlainTextEdit" name="tb_first_input">
    <property name="geometry">
     <rect>
      <x>80</x>
@@ -124,5 +124,58 @@
   </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>tb_first_input</sender>
+   <signal>selectionChanged()</signal>
+   <receiver>Form</receiver>
+   <slot>find_last_focused_edit()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>129</x>
+     <y>53</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>289</x>
+     <y>56</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tb_second_input</sender>
+   <signal>selectionChanged()</signal>
+   <receiver>Form</receiver>
+   <slot>find_last_focused_edit()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>177</x>
+     <y>100</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>340</x>
+     <y>91</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>combox_function_select</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>Form</receiver>
+   <slot>handle_input_on_function_select()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>174</x>
+     <y>23</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>322</x>
+     <y>15</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>find_last_focused_edit()</slot>
+  <slot>handle_input_on_function_select()</slot>
+ </slots>
 </ui>
