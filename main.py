@@ -6,10 +6,10 @@ from PyQt6.QtCore import QStringListModel
 from ui.views.geometry import Geometry
 from ui.views.percent import Percent
 from ui.views.BasicModule import BasicModule
-from ui.views.MathematicalFunctions import MathematicalFunctions
 
 # Import Source
 from src.history import encrypt_file, decrypt_file
+
 
 class MainWindow(QMainWindow):
     key = b"mysecretkey12345"
@@ -27,8 +27,7 @@ class MainWindow(QMainWindow):
         self.views = [
             {"name": "Geometry", "widget": Geometry()},
             {"name": "Percent", "widget": Percent(self)},
-            {"name": "Basic Module", "widget": BasicModule()},
-            {"name": "Mathematical Functions", "widget": MathematicalFunctions(self)}
+            {"name": "Basic Module", "widget": BasicModule()}
         ]
 
         self.view_mapping = {}
@@ -60,10 +59,12 @@ class MainWindow(QMainWindow):
 
     def create_view_switcher(self, view_name):
         """Return a function to switch to a specific view."""
+
         def switch_view():
             index = self.view_mapping.get(view_name, -1)
             if 0 <= index < self.stacked_widget.count():
                 self.stacked_widget.setCurrentIndex(index)
+
         return switch_view
 
     def showHistory(self):
@@ -75,7 +76,6 @@ class MainWindow(QMainWindow):
         self.history.append(expression)
         model = QStringListModel(self.history)
         self.historyList.setModel(model)
-
 
     def finalizeHistory(self):
         encrypt_file(self.history, self.key)
