@@ -45,12 +45,8 @@ class MainWindow(QMainWindow):
             {"name": "Start Screen", "widget": self.start_screen},
             {"name": "Geometry", "widget": Geometry()},
             {"name": "Percent", "widget": Percent(self)},
-<<<<<<< Updated upstream
             {"name": "Basic Module", "widget": BasicModule(self)},
-=======
-            {"name": "Basic Module", "widget": BasicModule()},
             {"name": "School", "widget": School()}
->>>>>>> Stashed changes
         ]
 
         self.view_mapping = {}
