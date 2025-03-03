@@ -27,13 +27,46 @@
    <property name="geometry">
     <rect>
      <x>60</x>
-     <y>130</y>
+     <y>200</y>
      <width>501</width>
      <height>381</height>
     </rect>
    </property>
   </widget>
+  <widget class="QLineEdit" name="errorLine">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>120</y>
+     <width>501</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="autoFillBackground">
+    <bool>true</bool>
+   </property>
+  </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>inputLine</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>Form</receiver>
+   <slot>update_raw_text()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>274</x>
+     <y>58</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>287</x>
+     <y>35</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>update_raw_text()</slot>
+ </slots>
 </ui>
