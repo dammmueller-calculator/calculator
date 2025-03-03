@@ -15,7 +15,8 @@ def calculate_faculty(faculty: int):
 
 
 def calculate_square_root(radicant: int):
-    return
+    square_root = radicant ** .5
+    return str(square_root), f"Square root of {radicant}: {square_root}"
 
 
 def calculate_function(func: str):
@@ -45,4 +46,6 @@ def find_prime_numbers(lower_limit: int, upper_limit: int):
 
 
 def convert_fraction(fraction: str):
-    return
+    split_string = fraction.split("/")
+    result = int(split_string[0]) / int(split_string[1])
+    return str(result), f"{fraction} = {result}"
