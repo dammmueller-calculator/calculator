@@ -49,6 +49,7 @@ class Percent(QWidget):
         if value == "C":
             self.tb_first_input.setPlainText("")
             self.tb_second_input.setPlainText("")
+            self.la_result_output.setText("")
 
     def handle_labels_on_select_change(self):
         index = self.combox_branch_function_select.currentIndex()
@@ -94,21 +95,21 @@ class Percent(QWidget):
         if index == 1:
             result = add_percentage(float(first_value), float(second_value))
         elif index == 2:
-            result = add_percentage(float(first_value), float(second_value))
+            result = subtract_percentage(float(first_value), float(second_value))
         elif index == 3:
-            result = add_percentage(float(first_value), float(second_value))
+            result = percent_of(float(first_value), float(second_value))
         elif index == 4:
-            result = add_percentage(float(first_value), float(second_value))
+            result = percentage(float(first_value), float(second_value))
         elif index == 5:
             if re.search('^-.*$', first_value):
                 print("Don't use negative values")
                 return
-            result = add_percentage(float(first_value), float(second_value))
+            result = gross_of_net(float(first_value), float(second_value))
         elif index == 6:
             if re.search('^-.*$', first_value):
                 print("Don't use negative values")
                 return
-            result = add_percentage(float(first_value), float(second_value))
+            result = net_of_gross(float(first_value), float(second_value))
         else:
             print("Please select a branch function first")
             return
