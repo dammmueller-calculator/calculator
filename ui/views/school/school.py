@@ -8,8 +8,9 @@ class School(QWidget):
     number_pressed = pyqtSignal(str)  
     sign_pressed = pyqtSignal(str)       
   
-    def __init__(self):
-        super().__init__() 
+    def __init__(self,parent=None):
+        super().__init__()
+        self.parent = parent 
         uic.loadUi("ui/views/school/school.ui", self) 
         inputWidget = self.findChild(QWidget, "InputModul") 
 
@@ -35,8 +36,11 @@ class School(QWidget):
         average = self.average_grade(inputString)
 
         self.gradesAVG.setText(str(average))  
-        self.gradesSUM.setText(str(self.sum_grades(inputString))) 
+        self.gradesCOUNT.setText(str(self.count_grades(inputString)))
         self.gradesRecommodation.setText(self.recommendation(average))
+
+        self.parent.appendHistory(f"Eingabestring {inputString} /Notendurchschnitt {average} /Anzahl Noten {self.count_grades(inputString)} /Empfehlung {self.recommendation(average)}")
+
 
     def filter_valid_grades(self, grades_text):
         valid_grades = []
@@ -78,3 +82,5 @@ class School(QWidget):
             return "Note 1"
         else:
             return "Ungültiger Durchschnitt"
+        
+    

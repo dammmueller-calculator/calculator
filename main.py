@@ -46,7 +46,7 @@ class MainWindow(QMainWindow):
             {"name": "Geometry", "widget": Geometry()},
             {"name": "Percent", "widget": Percent(self)},
             {"name": "Basic Module", "widget": BasicModule(self)},
-            {"name": "School", "widget": School()}
+            {"name": "School", "widget": School(self)}
         ]
 
         self.view_mapping = {}
