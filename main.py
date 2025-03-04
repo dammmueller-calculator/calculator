@@ -20,6 +20,7 @@ from ui.views.geometry import Geometry
 from ui.views.percent import Percent
 from ui.views.settings import Settings
 from ui.views.startScreen import StartScreen
+from ui.views.school import School
 
 
 class MainWindow(QMainWindow):
@@ -45,6 +46,7 @@ class MainWindow(QMainWindow):
             {"name": "Geometry", "widget": Geometry()},
             {"name": "Percent", "widget": Percent(self)},
             {"name": "Basic Module", "widget": BasicModule(self)},
+            {"name": "School", "widget": School()}
         ]
 
         self.view_mapping = {}
