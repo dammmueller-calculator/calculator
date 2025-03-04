@@ -53,7 +53,9 @@ class MathematicalFunctions(QWidget):
             self.tb_first_input.setPlainText("")
             self.tb_second_input.setPlainText("")
             self.la_result_output.setText("")
-        if value == "/":
+        if self.combox_function_select.currentIndex() == 5 and value == "/":
+            self.update_input_line(value)
+        if self.combox_function_select.currentIndex() == 3 and value == "^":
             self.update_input_line(value)
 
     def handle_input_on_function_select(self):
@@ -70,7 +72,7 @@ class MathematicalFunctions(QWidget):
             self.tb_first_input.setVisible(True)
             self.tb_second_input.setVisible(False)
         elif index == 3:
-            self.la_first_input.setText("f(x) =")
+            self.la_first_input.setText("Power function")
             self.la_second_input.setText("")
             self.tb_first_input.setVisible(True)
             self.tb_second_input.setVisible(False)
@@ -114,7 +116,7 @@ class MathematicalFunctions(QWidget):
                 return
             result = calculate_square_root(int(first_value))
         elif index == 3:
-            result = calculate_function()
+            result = power_function(first_value)
         elif index == 4:
             if not first_value or not second_value:
                 print("Enter all values")

@@ -14,13 +14,22 @@ def calculate_faculty(faculty: int):
     return f"{faculty}! = {result}", history
 
 
-def calculate_square_root(radicant: int):
-    square_root = radicant ** .5
-    return str(square_root), f"Square root of {radicant}: {square_root}"
+def calculate_square_root(radical: int):
+    square_root = radical ** .5
+    return str(square_root), f"Square root of {radical}: {square_root}"
 
 
-def calculate_function(func: str):
-    return
+def power_function(func: str):
+    power = int(func.split("^")[1])
+    base = int(func.split("^")[0])
+    result = base
+    result_str = f"{func} = {base} "
+
+    for i in range(power - 1):
+        result = result * base
+        result_str += f"* {base}"
+
+    return str(result), f"{result_str} = {result}"
 
 
 def find_prime_numbers(lower_limit: int, upper_limit: int):

@@ -89,6 +89,9 @@ class InputModule(QWidget):
     def bracketClose(self):
         self.sign_pressed.emit(")")
 
+    def power(self):
+        self.sign_pressed.emit("^")
+
     def get_result(self) -> str:
         return self.result
 
