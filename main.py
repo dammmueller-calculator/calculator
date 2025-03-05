@@ -5,6 +5,9 @@ from PyQt6.QtCore import QStringListModel
 # Import your view modules
 from ui.views.geometry import Geometry
 from ui.views.percent import Percent
+from ui.views.settings import Settings
+from ui.views.startScreen import StartScreen
+from ui.views.school import School
 from ui.views.BasicModule import BasicModule
 from ui.views.MathematicalFunctions import MathematicalFunctions
 
@@ -27,7 +30,8 @@ class MainWindow(QMainWindow):
         self.views = [
             {"name": "Geometry", "widget": Geometry()},
             {"name": "Percent", "widget": Percent(self)},
-            {"name": "Basic Module", "widget": BasicModule()},
+            {"name": "Basic Module", "widget": BasicModule(self)},
+            {"name": "School", "widget": School(self)}
             {"name": "Mathematical Functions", "widget": MathematicalFunctions(self)}
         ]
 
