@@ -77,8 +77,8 @@ class InputModule(QWidget):
     def clear(self):
         self.sign_pressed.emit("C")
 
-    def dot(self):
-        self.sign_pressed.emit(".")
+    def caret(self):
+        self.sign_pressed.emit("^")
 
     def comma(self):
         self.sign_pressed.emit(",")
@@ -92,9 +92,34 @@ class InputModule(QWidget):
     def get_result(self) -> str:
         return self.result
 
+    def hide_element(self, element: str) -> None:
+        match element:
+            case "^":
+                self.btn_caret.setVisible(False)
+            case "(":
+                self.btn_bracket_open.setVisible(False)
+            case ")":
+                self.btn_bracket_close.setVisible(False)
+            case "+":
+                self.btn_plus.setVisible(False)
+            case "-":
+                self.btn_minus.setVisible(False)
+            case "*":
+                self.btn_multiply.setVisible(False)
+            case "/":
+                self.btn_divide.setVisible(False)
+            case ",":
+                self.btn_comma.setVisible(False)
+            case "C":
+                self.btn_clear.setVisible(False)
+            case "=":
+                self.btn_equal.setVisible(False)
+            case _:
+                raise ValueError
+
     def validate(self, text: str):
         valid_numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
-        valid_signs = ["+", "-", "*", "/", "(", ")", ".", ","]
+        valid_signs = ["+", "-", "*", "/", "(", ")", "^", ","]
         last_char = ""
 
         for char in text:
