@@ -195,7 +195,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
      <string>Apply</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="btn_export_settings">
+   <widget class="QPushButton" name="btn_export_history">
     <property name="geometry">
      <rect>
       <x>110</x>
@@ -205,7 +205,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
      </rect>
     </property>
     <property name="text">
-     <string>export Settings</string>
+     <string> export history</string>
     </property>
    </widget>
   </widget>
@@ -325,6 +325,22 @@ li.checked::marker { content: &quot;\2612&quot;; }
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>btn_export_history</sender>
+   <signal>clicked()</signal>
+   <receiver>settings</receiver>
+   <slot>export_history()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>116</x>
+     <y>246</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>79</x>
+     <y>244</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>apply_changes()</slot>
@@ -334,5 +350,6 @@ li.checked::marker { content: &quot;\2612&quot;; }
   <slot>change_theme()</slot>
   <slot>change_history_path()</slot>
   <slot>change_key()</slot>
+  <slot>export_history()</slot>
  </slots>
 </ui>
