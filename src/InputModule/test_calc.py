@@ -1,13 +1,8 @@
 import unittest
-
 from InputModule import calc
 
 
 class TestGermanCalculator(unittest.TestCase):
-
-    # -------------
-    # FIRST TABLE
-    # -------------
     def test_addition_1_plus_1(self):
         self.assertEqual(calc("1 + 1"), 2)
 
@@ -103,6 +98,19 @@ class TestGermanCalculator(unittest.TestCase):
     def test_mixed_german_decimals(self):
         # 0,5 + 1,5 x 2 => 0.5 + (1.5 * 2) => 0.5 + 3 => 3.5
         self.assertAlmostEqual(calc("0,5 + 1,5 * 2"), 3.5, places=7)
+
+    def test_power_operator_caret(self):
+        # Test that caret (^) is correctly replaced with ** for exponentiation.
+        self.assertEqual(calc("2 ^ 3"), 8)
+        self.assertEqual(calc("2 ^ 3 + 4"), 12)
+        # Testing right-associativity: 2 ^ 3 ^ 2 => 2 ** (3 ** 2) = 2 ** 9 = 512
+        self.assertEqual(calc("2 ^ 3 ^ 2"), 512)
+
+    def test_power_operator_exp(self):
+        # Direct use of ** should be handled as well.
+        self.assertEqual(calc("2 ** 3"), 8)
+        self.assertEqual(calc("2 ** 3 + 4"), 12)
+        self.assertEqual(calc("2 ** 3 ** 2"), 512)
 
 
 # To run the tests:

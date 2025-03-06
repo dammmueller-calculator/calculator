@@ -33,17 +33,17 @@
     </rect>
    </property>
   </widget>
-  <widget class="QLineEdit" name="errorLine">
+  <widget class="QLabel" name="errorLine">
    <property name="geometry">
     <rect>
      <x>60</x>
      <y>120</y>
      <width>501</width>
-     <height>51</height>
+     <height>41</height>
     </rect>
    </property>
-   <property name="autoFillBackground">
-    <bool>true</bool>
+   <property name="text">
+    <string/>
    </property>
   </widget>
  </widget>

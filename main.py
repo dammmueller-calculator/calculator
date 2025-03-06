@@ -1,18 +1,25 @@
+import os
+
 from PyQt6 import QtWidgets, uic
-from PyQt6.QtWidgets import QStackedWidget, QMainWindow, QPushButton, QVBoxLayout, QFrame
-from PyQt6.QtCore import QStringListModel
+from PyQt6.QtWidgets import (
+    QFrame,
+    QMainWindow,
+    QPushButton,
+    QStackedWidget,
+    QVBoxLayout,
+)
+
+# Import Source
+from src.history import decrypt_file, encrypt_file
+from ui.views.BasicModule import BasicModule
+import src.settings
 
 # Import your view modules
 from ui.views.geometry import Geometry
 from ui.views.percent import Percent
 from ui.views.settings import Settings
 from ui.views.startScreen import StartScreen
-from ui.views.school import School
-from ui.views.BasicModule import BasicModule
-from ui.views.MathematicalFunctions import MathematicalFunctions
 
-# Import Source
-from src.history import encrypt_file, decrypt_file
 
 class MainWindow(QMainWindow):
     key = b"mysecretkey12345"
@@ -26,13 +33,18 @@ class MainWindow(QMainWindow):
         self.menu_frame = self.findChild(QFrame, "menuFrame")
         self.stacked_widget = self.findChild(QStackedWidget, "modules")
 
-        # Initialize views
+        # Initialize the start screen widget (this will be the default screen)
+        self.start_screen = StartScreen(self.history)  # Pass history to start screen
+        self.stacked_widget.addWidget(
+            self.start_screen
+        )  # Add start screen as the first widget
+        self.view_mapping = {"Start Screen": 0}
+
+        # Add the start screen widget as one of the views
         self.views = [
             {"name": "Geometry", "widget": Geometry()},
             {"name": "Percent", "widget": Percent(self)},
             {"name": "Basic Module", "widget": BasicModule(self)},
-            {"name": "School", "widget": School(self)}
-            {"name": "Mathematical Functions", "widget": MathematicalFunctions(self)}
         ]
 
         self.view_mapping = {}
@@ -49,6 +61,8 @@ class MainWindow(QMainWindow):
         """Method for ensuring connections if needed."""
         pass
 
+        self.settings_window.history_export.connect(self.export_history)
+
     def add_menu_buttons(self):
         """Create buttons dynamically and add them to the menu frame with minimal spacing."""
         layout = QVBoxLayout(self.menu_frame)
@@ -64,11 +78,31 @@ class MainWindow(QMainWindow):
 
     def create_view_switcher(self, view_name):
         """Return a function to switch to a specific view."""
+
         def switch_view():
             index = self.view_mapping.get(view_name, -1)
             if 0 <= index < self.stacked_widget.count():
                 self.stacked_widget.setCurrentIndex(index)
+
         return switch_view
+
+    def loadSettings(self):
+        try:
+            config = src.settings.load_config("settings.json")
+            return Settings(config)
+
+        except ValueError:
+            return Settings()
+
+    def ensure_connection(self):
+        """Method for ensuring connections if needed."""
+        pass
+
+    def open_settings(self):
+        self.settings_window.show()
+
+    def apply_settings(self):
+        self.settings = self.settings_window.get_settings()
 
     def showHistory(self):
         self.history = decrypt_file("history.txt", self.key)
@@ -82,11 +116,22 @@ class MainWindow(QMainWindow):
 
 
     def finalizeHistory(self):
-        encrypt_file(self.history, self.key)
+        encrypt_file(self.history, self.settings["key"], self.settings["history_path"])
+
+    def export_history(self):
+        output = decrypt_file(self.settings["history_path"], self.settings["key"])
+        with open("history_out.txt", "w") as file:
+            file.write("\n".join(output))
 
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
+
+    # Load and apply the QSS stylesheet
+    with open("styles.qss", "r") as file:
+        qss = file.read()
+        app.setStyleSheet(qss)
+
     window = MainWindow()
     window.show()
     app.exec()
