@@ -1,5 +1,4 @@
 import os
-import tomllib
 
 from PyQt6 import QtWidgets, uic
 from PyQt6.QtWidgets import (
@@ -11,9 +10,9 @@ from PyQt6.QtWidgets import (
 )
 
 # Import Source
-# Import Source
 from src.history import decrypt_file, encrypt_file
 from ui.views.BasicModule import BasicModule
+import src.settings
 
 # Import your view modules
 from ui.views.geometry import Geometry
@@ -88,11 +87,12 @@ class MainWindow(QMainWindow):
         return switch_view
 
     def loadSettings(self):
-        if os.path.exists("settings.toml"):
-            with open("settings.toml", "rb") as f:
-                self.settings = tomllib.load(f)
-            return Settings(self.settings)
-        return Settings()
+        try:
+            config = src.settings.load_config("settings.json")
+            return Settings(config)
+
+        except ValueError:
+            return Settings()
 
     def ensure_connection(self):
         """Method for ensuring connections if needed."""
@@ -114,14 +114,6 @@ class MainWindow(QMainWindow):
 
     def finalizeHistory(self):
         encrypt_file(self.history, self.settings["key"], self.settings["history_path"])
-
-    def finalize(self):
-        self.finalizeHistory()
-
-        with open("settings.toml", "wb") as f:
-            tomllib.dump(self.settings, f)
-
-        self.close()
 
 
 if __name__ == "__main__":
