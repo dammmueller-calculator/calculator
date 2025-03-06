@@ -5,6 +5,7 @@ from PyQt6.QtWidgets import QMainWindow
 
 class Settings(QMainWindow):
     settngs_changed = pyqtSignal()
+    history_export = pyqtSignal()
 
     settings = {
         "history_path": "history.txt",
@@ -103,3 +104,6 @@ class Settings(QMainWindow):
 
     def change_key(self):
         self.settings_cache["key"] = self.ip_secret_key.toPlainText()
+
+    def export_history(self):
+        self.history_export.emit()

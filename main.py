@@ -63,6 +63,8 @@ class MainWindow(QMainWindow):
         self.settings = self.settings_window.get_settings()
         self.showHistory()
 
+        self.settings_window.history_export.connect(self.export_history)
+
     def add_menu_buttons(self):
         """Create buttons dynamically and add them to the menu frame with minimal spacing."""
         layout = QVBoxLayout(self.menu_frame)
@@ -114,6 +116,11 @@ class MainWindow(QMainWindow):
 
     def finalizeHistory(self):
         encrypt_file(self.history, self.settings["key"], self.settings["history_path"])
+
+    def export_history(self):
+        output = decrypt_file(self.settings["history_path"], self.settings["key"])
+        with open("history_out.txt", "w") as file:
+            file.write("\n".join(output))
 
 
 if __name__ == "__main__":
