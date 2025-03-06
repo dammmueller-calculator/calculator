@@ -125,6 +125,12 @@ class MainWindow(QMainWindow):
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
+
+    # Load and apply the QSS stylesheet
+    with open("styles.qss", "r") as file:
+        qss = file.read()
+        app.setStyleSheet(qss)
+
     window = MainWindow()
     window.show()
     app.exec()
