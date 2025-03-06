@@ -27,19 +27,23 @@ operators = {
     ast.Sub: op.sub,
     ast.Mult: op.mul,
     ast.Div: op.truediv,
+    ast.Pow: op.pow,
     ast.USub: op.neg,
 }
 
 
 def calc(expr: str) -> float:
     """
-    Placeholder for your German-friendly calculator.
-    - Normalizes German number notation to standard notation
-    - Evaluates expressions with correct operator precedence
-    - Raises ZeroDivisionError on division by zero
+    German-friendly calculator.
+    - Normalizes German number notation to standard notation.
+    - Converts '^' to '**' for power operations.
+    - Evaluates expressions with correct operator precedence.
+    - Raises ZeroDivisionError on division by zero.
     """
     # Normalize the expression to standard numeric notation.
     normalized_expr = normalize_german_expr(expr)
+    # Replace '^' with Python's power operator '**'
+    normalized_expr = normalized_expr.replace("^", "**")
 
     def eval_node(node):
         if isinstance(node, ast.Constant):  # For Python 3.8+ numbers.
