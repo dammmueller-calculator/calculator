@@ -1,8 +1,19 @@
 import unittest
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/main
 from InputModule import calc
 
 
 class TestGermanCalculator(unittest.TestCase):
+<<<<<<< HEAD
+=======
+
+    # -------------
+    # FIRST TABLE
+    # -------------
+>>>>>>> origin/main
     def test_addition_1_plus_1(self):
         self.assertEqual(calc("1 + 1"), 2)
 
@@ -99,6 +110,7 @@ class TestGermanCalculator(unittest.TestCase):
         # 0,5 + 1,5 x 2 => 0.5 + (1.5 * 2) => 0.5 + 3 => 3.5
         self.assertAlmostEqual(calc("0,5 + 1,5 * 2"), 3.5, places=7)
 
+<<<<<<< HEAD
     def test_power_operator_caret(self):
         # Test that caret (^) is correctly replaced with ** for exponentiation.
         self.assertEqual(calc("2 ^ 3"), 8)
@@ -112,6 +124,8 @@ class TestGermanCalculator(unittest.TestCase):
         self.assertEqual(calc("2 ** 3 + 4"), 12)
         self.assertEqual(calc("2 ** 3 ** 2"), 512)
 
+=======
+>>>>>>> origin/main
 
 # To run the tests:
 if __name__ == "__main__":

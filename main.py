@@ -2,6 +2,16 @@ import os
 
 from PyQt6 import QtWidgets, uic
 from PyQt6.QtWidgets import (
+    QStackedWidget,
+    QMainWindow,
+    QPushButton,
+    QVBoxLayout,
+    QFrame,
+)
+from PyQt6.QtCore import QStringListModel
+
+from PyQt6 import QtWidgets, uic
+from PyQt6.QtWidgets import (
     QFrame,
     QMainWindow,
     QPushButton,
@@ -19,14 +29,22 @@ from ui.views.geometry import Geometry
 from ui.views.percent import Percent
 from ui.views.settings import Settings
 from ui.views.startScreen import StartScreen
+from ui.views.school import School
+from ui.views.BasicModule import BasicModule
+from ui.views.MathematicalFunctions import MathematicalFunctions
+
+# Import Source
+from src.history import encrypt_file, decrypt_file
 
 
 class MainWindow(QMainWindow):
+    key = b"mysecretkey12345"
     history = []
 
     def __init__(self):
         super(MainWindow, self).__init__()
         uic.loadUi("ui/main_window.ui", self)
+        self.showHistory()
 
         self.menu_frame = self.findChild(QFrame, "menuFrame")
         self.stacked_widget = self.findChild(QStackedWidget, "modules")
@@ -38,12 +56,14 @@ class MainWindow(QMainWindow):
         )  # Add start screen as the first widget
         self.view_mapping = {"Start Screen": 0}
 
-        # Add the start screen widget as one of the views
+        # Initialize views
         self.views = [
             {"name": "Start Screen", "widget": self.start_screen},
             {"name": "Geometry", "widget": Geometry()},
             {"name": "Percent", "widget": Percent(self)},
             {"name": "Basic Module", "widget": BasicModule(self)},
+            {"name": "School", "widget": School(self)},
+            {"name": "Mathematical Functions", "widget": MathematicalFunctions(self)},
         ]
 
         self.view_mapping = {}
@@ -53,17 +73,11 @@ class MainWindow(QMainWindow):
                 view["widget"]
             )
 
-        # Add menu buttons dynamically (to switch between views)
-        self.stacked_widget.setCurrentWidget(self.start_screen)
+        self.settings_window = self.loadSettings()
+        self.settings = self.settings_window.get_settings()
+
         self.add_menu_buttons()
         self.ensure_connection()
-
-        self.settings_window = self.loadSettings()
-        self.settings_window.settngs_changed.connect(self.apply_settings)
-        self.settings = self.settings_window.get_settings()
-        self.showHistory()
-
-        self.settings_window.history_export.connect(self.export_history)
 
     def add_menu_buttons(self):
         """Create buttons dynamically and add them to the menu frame with minimal spacing."""
@@ -107,20 +121,23 @@ class MainWindow(QMainWindow):
         self.settings = self.settings_window.get_settings()
 
     def showHistory(self):
-        self.history = decrypt_file(self.settings["history_path"], self.settings["key"])
-        self.start_screen.update_history(self.history)  # Update history in start screen
+        self.history = decrypt_file("history.txt", self.key)
+        model = QStringListModel(self.history)
+        self.historyList.setModel(model)
 
     def appendHistory(self, expression):
         self.history.append(expression)
-        self.start_screen.update_history(self.history)  # Update history in start screen
+        model = QStringListModel(self.history)
+        self.historyList.setModel(model)
 
     def finalizeHistory(self):
-        encrypt_file(self.history, self.settings["key"], self.settings["history_path"])
+        encrypt_file(self.history, self.key)
 
     def export_history(self):
         output = decrypt_file(self.settings["history_path"], self.settings["key"])
         with open("history_out.txt", "w") as file:
             file.write("\n".join(output))
+        encrypt_file(self.history, self.key)
 
 
 if __name__ == "__main__":

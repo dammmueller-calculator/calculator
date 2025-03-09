@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>281</width>
-    <height>344</height>
+    <width>274</width>
+    <height>341</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -432,7 +432,7 @@
     </hint>
     <hint type="destinationlabel">
      <x>207</x>
-     <y>404</y>
+     <y>340</y>
     </hint>
    </hints>
   </connection>
@@ -447,7 +447,7 @@
      <y>89</y>
     </hint>
     <hint type="destinationlabel">
-     <x>356</x>
+     <x>338</x>
      <y>87</y>
     </hint>
    </hints>
@@ -463,7 +463,7 @@
      <y>150</y>
     </hint>
     <hint type="destinationlabel">
-     <x>357</x>
+     <x>338</x>
      <y>156</y>
     </hint>
    </hints>
@@ -479,7 +479,7 @@
      <y>232</y>
     </hint>
     <hint type="destinationlabel">
-     <x>355</x>
+     <x>338</x>
      <y>225</y>
     </hint>
    </hints>
@@ -495,7 +495,7 @@
      <y>305</y>
     </hint>
     <hint type="destinationlabel">
-     <x>362</x>
+     <x>338</x>
      <y>298</y>
     </hint>
    </hints>
@@ -523,12 +523,12 @@
    <slot>equal()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>321</x>
-     <y>369</y>
+     <x>269</x>
+     <y>339</y>
     </hint>
     <hint type="destinationlabel">
-     <x>365</x>
-     <y>366</y>
+     <x>338</x>
+     <y>340</y>
     </hint>
    </hints>
   </connection>
@@ -544,7 +544,7 @@
     </hint>
     <hint type="destinationlabel">
      <x>35</x>
-     <y>364</y>
+     <y>340</y>
     </hint>
    </hints>
   </connection>
