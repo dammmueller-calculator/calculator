@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>629</width>
+    <height>633</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QWidget" name="wi_input_module" native="true">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>220</y>
+     <width>481</width>
+     <height>391</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="combox_function_select">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>181</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>Branchenfunktion Auswählen</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Fakultät</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Quadratwurzel</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Potenzfunktionen</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Primzahlen</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Umwandlung Dezimalbruch</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLabel" name="la_first_input">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>40</y>
+     <width>71</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPlainTextEdit" name="tb_first_input">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>40</y>
+     <width>104</width>
+     <height>31</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPlainTextEdit" name="tb_second_input">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>80</y>
+     <width>104</width>
+     <height>31</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="la_second_input">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>80</y>
+     <width>71</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="la_result_output">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>120</y>
+     <width>441</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>tb_first_input</sender>
+   <signal>selectionChanged()</signal>
+   <receiver>Form</receiver>
+   <slot>find_last_focused_edit()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>129</x>
+     <y>53</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>289</x>
+     <y>56</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tb_second_input</sender>
+   <signal>selectionChanged()</signal>
+   <receiver>Form</receiver>
+   <slot>find_last_focused_edit()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>177</x>
+     <y>100</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>340</x>
+     <y>91</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>combox_function_select</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>Form</receiver>
+   <slot>handle_input_on_function_select()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>174</x>
+     <y>23</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>322</x>
+     <y>15</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>find_last_focused_edit()</slot>
+  <slot>handle_input_on_function_select()</slot>
+ </slots>
+</ui>
