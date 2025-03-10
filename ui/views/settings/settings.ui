@@ -68,7 +68,17 @@ li.checked::marker { content: &quot;\2612&quot;; }
     </property>
     <item>
      <property name="text">
-      <string>arial</string>
+      <string>Arial</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Times New Roman</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>DejaVu Sans</string>
      </property>
     </item>
    </widget>
