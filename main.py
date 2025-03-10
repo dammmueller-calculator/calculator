@@ -1,4 +1,4 @@
-import os
+import datetime
 
 from PyQt6 import QtWidgets, uic
 from PyQt6.QtWidgets import (
@@ -116,7 +116,8 @@ class MainWindow(QMainWindow):
         self.start_screen.update_history(self.history)  # Update history in start screen
 
     def appendHistory(self, expression):
-        self.history.append(expression)
+        expr = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + ": " + expression
+        self.history.append(expr)
         self.start_screen.update_history(self.history)  # Update history in start screen
 
     def finalizeHistory(self):
