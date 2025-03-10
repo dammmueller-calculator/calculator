@@ -19,7 +19,7 @@ import src.settings
 # Import your view modules
 from ui.views.geometry import Geometry
 from ui.views.percent import Percent
-from ui.views.settings import Settings
+from ui.views.settings.settings import Settings
 from ui.views.startScreen import StartScreen
 from ui.views.school import School
 from ui.views.BasicModule import BasicModule
