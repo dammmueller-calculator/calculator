@@ -21,6 +21,10 @@ from ui.views.percent import Percent
 from ui.views.school import School
 from ui.views.settings import Settings
 from ui.views.startScreen import StartScreen
+from ui.views.school import School
+from ui.views.BasicModule import BasicModule
+from ui.views.MathematicalFunctions import MathematicalFunctions
+from ui.views.Informatik import Informatik
 
 
 class MainWindow(QMainWindow):
@@ -49,6 +53,8 @@ class MainWindow(QMainWindow):
             {"name": "Percent", "widget": Percent(self)},
             {"name": "Basic Module", "widget": BasicModule(self)},
             {"name": "School", "widget": School(self)},
+            {"name": "Mathematical Functions", "widget": MathematicalFunctions(self)},
+            {"name": "Informatik", "widget": Informatik(self)}
         ]
 
         self.view_mapping = {}
@@ -127,7 +133,6 @@ class MainWindow(QMainWindow):
         output = decrypt_file(self.settings["history_path"], self.settings["key"])
         with open("history_out.txt", "w") as file:
             file.write("\n".join(output))
-
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
