@@ -50,6 +50,8 @@ class Percent(QWidget):
             self.tb_first_input.setPlainText("")
             self.tb_second_input.setPlainText("")
             self.la_result_output.setText("")
+        if value == "," and self.last_focused_edit.toPlainText().find(".") == -1:
+            self.update_input_line(".")
 
     def handle_labels_on_select_change(self):
         index = self.combox_branch_function_select.currentIndex()

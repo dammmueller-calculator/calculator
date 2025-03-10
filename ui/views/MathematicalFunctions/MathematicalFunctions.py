@@ -53,9 +53,17 @@ class MathematicalFunctions(QWidget):
             self.tb_first_input.setPlainText("")
             self.tb_second_input.setPlainText("")
             self.la_result_output.setText("")
-        if self.combox_function_select.currentIndex() == 5 and value == "/":
+        if (
+            self.combox_function_select.currentIndex() == 5
+            and value == "/"
+            and self.last_focused_edit.toPlainText().find("/") == -1
+        ):
             self.update_input_line(value)
-        if self.combox_function_select.currentIndex() == 3 and value == "^":
+        if (
+            self.combox_function_select.currentIndex() == 3
+            and value == "^"
+            and self.last_focused_edit.toPlainText().find("^") == -1
+        ):
             self.update_input_line(value)
 
     def handle_input_on_function_select(self):

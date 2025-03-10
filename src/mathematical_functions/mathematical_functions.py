@@ -9,7 +9,6 @@ def calculate_faculty(faculty: int):
         result = result * counter
         counter = counter - 1
         i = i + 1
-        print(i)
 
     return f"{faculty}! = {result}", history
 

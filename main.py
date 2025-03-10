@@ -13,6 +13,7 @@ from PyQt6.QtWidgets import (
 from src.history import decrypt_file, encrypt_file
 from ui.views.BasicModule import BasicModule
 import src.settings
+from ui.views.MathematicalFunctions import MathematicalFunctions
 
 # Import your view modules
 from ui.views.geometry import Geometry
@@ -44,6 +45,7 @@ class MainWindow(QMainWindow):
             {"name": "Geometry", "widget": Geometry()},
             {"name": "Percent", "widget": Percent(self)},
             {"name": "Basic Module", "widget": BasicModule(self)},
+            {"name": "Mathematical Functions", "widget": MathematicalFunctions(self)}
         ]
 
         self.view_mapping = {}
