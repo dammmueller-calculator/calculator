@@ -5,6 +5,7 @@ from PyQt6.QtWidgets import QMainWindow
 
 class Settings(QMainWindow):
     settngs_changed = pyqtSignal()
+    history_export = pyqtSignal()
 
     settings = {
         "history_path": "history.txt",
@@ -37,11 +38,11 @@ class Settings(QMainWindow):
         if fileSettings is not None:
             self.settings = fileSettings
 
-        self.fontSelect.currentIndexChanged.connect(self.change_font)
-        self.fontSizeSelect.currentIndexChanged.connect(self.change_font_size)
-        self.themeSelect.currentIndexChanged.connect(self.change_theme)
-        self.historySelect.textChanged.connect(self.change_history_path)
-        self.secretKeySelect.textChanged.connect(self.change_key)
+        self.cb_font.currentIndexChanged.connect(self.change_font)
+        self.cb_font_size.currentIndexChanged.connect(self.change_font_size)
+        self.cb_theme.currentIndexChanged.connect(self.change_theme)
+        self.ip_history.textChanged.connect(self.change_history_path)
+        self.ip_secret_key.textChanged.connect(self.change_key)
 
         self.update_ui_from_settings()
 
@@ -62,23 +63,23 @@ class Settings(QMainWindow):
     def update_ui_from_settings(self):
         """Update the UI elements to match the current settings."""
         font_index = list(self.font_select.values()).index(self.settings["font"])
-        self.fontSelect.setCurrentIndex(font_index)
+        self.cb_font.setCurrentIndex(font_index)
 
         # Set the font size combo box
         font_size_index = list(self.font_size_select.values()).index(
             self.settings["font_size"]
         )
-        self.fontSizeSelect.setCurrentIndex(font_size_index)
+        self.cb_font_size.setCurrentIndex(font_size_index)
 
         # Set the theme combo box
         theme_index = list(self.theme_select.values()).index(self.settings["theme"])
-        self.themeSelect.setCurrentIndex(theme_index)
+        self.cb_theme.setCurrentIndex(theme_index)
 
         # Set the history path text field
-        self.historySelect.setText(self.settings["history_path"])
+        self.ip_history.setText(self.settings["history_path"])
 
         # Set the key text field
-        self.secretKeySelect.setText(
+        self.ip_secret_key.setText(
             self.settings["key"].decode()
             if isinstance(self.settings["key"], bytes)
             else self.settings["key"]
@@ -88,20 +89,21 @@ class Settings(QMainWindow):
         return self.settings
 
     def change_font(self):
-        self.settings_cache["font"] = self.font_select[self.fontSelect.currentIndex()]
+        self.settings_cache["font"] = self.font_select[self.cb_font.currentIndex()]
 
     def change_font_size(self):
         self.settings_cache["font_size"] = self.font_size_select[
-            self.fontSizeSelect.currentIndex()
+            self.cb_font_size.currentIndex()
         ]
 
     def change_theme(self):
-        self.settings_cache["theme"] = self.theme_select[
-            self.themeSelect.currentIndex()
-        ]
+        self.settings_cache["theme"] = self.theme_select[self.cb_theme.currentIndex()]
 
     def change_history_path(self):
-        self.settings_cache["history_path"] = self.historySelect.toPlainText()
+        self.settings_cache["history_path"] = self.ip_history.toPlainText()
 
     def change_key(self):
-        self.settings_cache["key"] = self.secretKeySelect.toPlainText()
+        self.settings_cache["key"] = self.ip_secret_key.toPlainText()
+
+    def export_history(self):
+        self.history_export.emit()
