@@ -619,6 +619,5 @@
   <slot>slot1()</slot>
   <slot>bracketClose()</slot>
   <slot>bracketOpen()</slot>
-  <slot>caret()</slot>
  </slots>
 </ui>

@@ -80,6 +80,9 @@ class InputModule(QWidget):
     def caret(self):
         self.sign_pressed.emit("^")
 
+    def dot(self):
+        self.sign_pressed.emit(".")
+
     def comma(self):
         self.sign_pressed.emit(",")
 
