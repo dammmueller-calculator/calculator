@@ -1,0 +1,1 @@
+from .informatik import Informatik

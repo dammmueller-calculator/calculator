@@ -1,5 +1,6 @@
 from PyQt6 import uic
 from PyQt6.QtCore import pyqtSignal
+from PyQt6.QtGui import QFont
 from PyQt6.QtWidgets import QMainWindow
 
 
@@ -11,13 +12,15 @@ class Settings(QMainWindow):
         "history_path": "history.txt",
         "key": "mysecretkey12345",
         "theme": "light",
-        "font_size": "medium",
-        "font": "arial",
+        "font_size": "small",
+        "font": "Arial",
     }
     settings_cache = settings.copy()
 
     font_select = {
-        0: "arial",
+        0: "Arial",
+        1: "Times New Roman",
+        2: "DejaVu Sans",
     }
 
     font_size_select = {
@@ -31,9 +34,17 @@ class Settings(QMainWindow):
         1: "dark",
     }
 
-    def __init__(self, fileSettings=None):
+    FONT_SIZES = {
+        "small": 10,
+        "medium": 15,
+        "large": 20,
+        }
+
+    def __init__(self, app, fileSettings=None):
         super().__init__()
-        uic.loadUi("ui/views/settings/settings.ui", self)
+        self.ui = uic.loadUi("ui/views/settings/settings.ui", self)
+
+        self.app = app
 
         if fileSettings is not None:
             self.settings = fileSettings
@@ -46,8 +57,17 @@ class Settings(QMainWindow):
 
         self.update_ui_from_settings()
 
+
     def apply_changes(self):
         self.settings = self.settings_cache.copy()
+
+        # Apply font settings
+        size = self.FONT_SIZES[self.settings["font_size"]]
+        self.app.setFont(QFont(self.settings["font"], size))
+
+        # Apply theme settings
+        self.apply_theme(self.settings["theme"])
+
         self.settngs_changed.emit()
         self.close()
 
@@ -85,6 +105,8 @@ class Settings(QMainWindow):
             else self.settings["key"]
         )
 
+        self.apply_theme(self.settings["theme"])
+
     def get_settings(self):
         return self.settings
 
@@ -107,3 +129,38 @@ class Settings(QMainWindow):
 
     def export_history(self):
         self.history_export.emit()
+
+
+    def apply_theme(self, theme):
+        if theme == "dark":
+            self.app.setStyleSheet("""
+                QWidget {
+                    background-color: #2E2E2E;
+                    color: white;
+                }
+                QPushButton {
+                    background-color: #555;
+                    color: white;
+                    border-radius: 5px;
+                    padding: 5px;
+                }
+                QPushButton:hover {
+                    background-color: #777;
+                }
+            """)
+        else:  # Default to light theme
+            self.app.setStyleSheet("""
+                QWidget {
+                    background-color: white;
+                    color: black;
+                }
+                QPushButton {
+                    background-color: #DDD;
+                    color: black;
+                    border-radius: 5px;
+                    padding: 5px;
+                }
+                QPushButton:hover {
+                    background-color: #BBB;
+                }
+            """)

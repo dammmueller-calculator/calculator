@@ -30,6 +30,11 @@ class BasicModule(QWidget):
     def update_inputLine(self, value):
         if value == "=":
             return
+
+        if value == "C":
+            self.inputLine.setText("")
+            return
+
         text = self.inputLine.text()
         self.inputLine.setText(text + value)
 

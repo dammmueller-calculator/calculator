@@ -102,13 +102,44 @@
     <string>Notenempfehlung</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="btn_sideCalc">
+   <property name="geometry">
+    <rect>
+     <x>72</x>
+     <y>40</y>
+     <width>301</width>
+     <height>36</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Nebenrechner</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>btn_sideCalc</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>doSideCalc()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>219</x>
+     <y>47</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>229</x>
+     <y>19</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
  <slots>
   <slot>startButton()</slot>
   <slot>setValueAVG()</slot>
   <slot>calculate()</slot>
   <slot>grandesAVG()</slot>
+  <slot>doSideCalc()</slot>
  </slots>
 </ui>
