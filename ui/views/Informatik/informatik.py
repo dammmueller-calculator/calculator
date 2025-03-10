@@ -33,7 +33,7 @@ class Informatik(QWidget):
         self.input_module.hide_element("/")
         self.input_module.hide_element("(")
         self.input_module.hide_element(")")   
-        #self.input_module.hide_element("C") #TODO
+        #self.input_module.hide_element("C")
 
         self.input_module.number_pressed.connect(self.setText)
         self.input_module.sign_pressed.connect(self.setText)       
@@ -50,16 +50,28 @@ class Informatik(QWidget):
 
     def handle_number_system_change(self):        
         index = self.inputBox.currentIndex()
-        if index == 0:  # HEX
+        if index == 0:   # HEX
             self.hex()  
-        elif index == 1:  # BIN
+        elif index == 1: # BIN
             self.binary()  
-        elif index == 2:  # DEZ           
+        elif index == 2: # DEZ           
             self.decimal()   
         elif index == 3: # TERN
             self.terneray()   
         elif index == 4: # OCT
-            self.octal()    
+            self.octal()          
+        elif index == 5: # B
+            self.byte()
+        elif index == 6: # MB
+            self.kiloByte()
+        elif index == 7: # KB
+            self.megaByte()
+        elif index == 8: # GB
+            self.gigaByte()
+        elif index == 9: # TB
+            self.teraByte()
+        elif index == 10: # PB
+            self.petaByte()  
 
     def decimal(self):
         index = self.outputBox.currentIndex()
@@ -72,7 +84,7 @@ class Informatik(QWidget):
         elif index == 3:  # TERN
             self.outputString.setText(InfoDEC.decimal_to_ternary(self.inputString.text()))
         elif index == 4:  # OCT
-            self.outputString.setText(InfoDEC.decimal_to_octal(self.inputString.text()))    
+            self.outputString.setText(InfoDEC.decimal_to_octal(self.inputString.text()))                
 
     def hex(self):
         index = self.outputBox.currentIndex()
@@ -112,4 +124,17 @@ class Informatik(QWidget):
             self.outputString.setText(self.inputString.text())
         elif index == 4:  # OCT  
             self.outputString.setText(InfoTERN.ternary_to_octal(self.inputString.text()))
+
+    def octal(self):
+        index = self.outputBox.currentIndex()
+        if index == 0:    # HEX
+            self.outputString.setText(InfoOCT.octal_to_hex(self.inputString.text()))
+        elif index == 1:  # BIN
+            self.outputString.setText(InfoOCT.octal_to_binary(self.inputString.text()))
+        elif index == 2:  # DEZ
+            self.outputString.setText(InfoOCT.octal_to_decimal(self.inputString.text()))
+        elif index == 3:  # TERN
+            self.outputString.setText(InfoOCT.octal_to_ternary(self.inputString.text()))
+        elif index == 4:  # OCT
+            self.outputString.setText(self.inputString.text())        
 
