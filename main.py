@@ -12,11 +12,13 @@ from PyQt6.QtWidgets import (
 # Import Source
 from src.history import decrypt_file, encrypt_file
 from ui.views.BasicModule import BasicModule
+from ui.views.MathematicalFunctions import MathematicalFunctions
 import src.settings
 
 # Import your view modules
 from ui.views.geometry import Geometry
 from ui.views.percent import Percent
+from ui.views.school import School
 from ui.views.settings import Settings
 from ui.views.startScreen import StartScreen
 
@@ -44,6 +46,8 @@ class MainWindow(QMainWindow):
             {"name": "Geometry", "widget": Geometry()},
             {"name": "Percent", "widget": Percent(self)},
             {"name": "Basic Module", "widget": BasicModule(self)},
+            {"name": "School", "widget": School(self)},
+            {"name": "Mathematical Functions", "widget": MathematicalFunctions(self)}
         ]
 
         self.view_mapping = {}
@@ -89,12 +93,11 @@ class MainWindow(QMainWindow):
         return switch_view
 
     def loadSettings(self):
-        try:
-            config = src.settings.load_config("settings.json")
-            return Settings(config)
-
-        except ValueError:
-            return Settings()
+        if os.path.exists("settings.toml"):
+            with open("settings.toml", "rb") as f:
+                self.settings = tomllib.load(f)
+            return Settings(self.settings)
+        return Settings()
 
     def ensure_connection(self):
         """Method for ensuring connections if needed."""
@@ -117,20 +120,17 @@ class MainWindow(QMainWindow):
     def finalizeHistory(self):
         encrypt_file(self.history, self.settings["key"], self.settings["history_path"])
 
-    def export_history(self):
-        output = decrypt_file(self.settings["history_path"], self.settings["key"])
-        with open("history_out.txt", "w") as file:
-            file.write("\n".join(output))
+    def finalize(self):
+        self.finalizeHistory()
+
+        with open("settings.toml", "wb") as f:
+            tomllib.dump(self.settings, f)
+
+        self.close()
 
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
-
-    # Load and apply the QSS stylesheet
-    with open("styles.qss", "r") as file:
-        qss = file.read()
-        app.setStyleSheet(qss)
-
     window = MainWindow()
     window.show()
     app.exec()
