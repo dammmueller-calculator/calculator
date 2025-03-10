@@ -296,6 +296,16 @@
     <string>Reset</string>
    </property>
   </widget>
+  <widget class="QWidget" name="wi_inputModule" native="true">
+   <property name="geometry">
+    <rect>
+     <x>270</x>
+     <y>290</y>
+     <width>271</width>
+     <height>151</height>
+    </rect>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

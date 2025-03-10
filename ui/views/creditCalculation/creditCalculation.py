@@ -1,7 +1,8 @@
 from PyQt6 import uic
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QApplication
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QApplication, QTextEdit, QLabel, QMessageBox, QLineEdit, QDoubleSpinBox, QSpinBox
+from PyQt6.QtCore import QObject, QEvent
 from ui.views.InputModule import InputModule
-from src.creditCalculation.creditCalc import *
+from src.creditCalculation.creditCalc import calculate_credit
 
 
 class CreditCalculation(QWidget):
@@ -9,41 +10,53 @@ class CreditCalculation(QWidget):
         super().__init__()
         self.parent = parent
 
-        # lade ui-file für kreditrechner
+        # Lade UI-Datei
         uic.loadUi("ui/views/creditCalculation/creditCalculation.ui", self)
 
-        # suche widget für eingabe-modul und setze layout
+        # Referenzen zu UI-Elementen setzen
+        self.tb_credit_amount = self.findChild(QLineEdit, "tb_credit_amount")
+        self.dsb_interest_rate = self.findChild(QDoubleSpinBox, "dsb_interest_rate")
+        self.tb_term = self.findChild(QSpinBox, "tb_term")
+        self.la_monthly_rate = self.findChild(QLabel, "la_monthly_rate")
+        self.la_total_cost = self.findChild(QLabel, "la_total_cost")
+        self.la_total_interest = self.findChild(QLabel, "la_total_interest")
+
+        # Event-Filter für Fokus-Handling setzen
+        self.tb_credit_amount.installEventFilter(self)
+        self.dsb_interest_rate.installEventFilter(self)
+        self.tb_term.installEventFilter(self)
+
+        # Suche Widget für Eingabe-Modul und setze Layout
         input_widget = self.findChild(QWidget, "wi_inputModule")
         layout = QVBoxLayout()
         input_widget.setLayout(layout)
 
-        # erstelle instanz eingabe-modul und füge es layout hinzu
+        # Eingabe-Modul erstellen und ins Layout einfügen
         self.input_module = InputModule()
         layout.addWidget(self.input_module)
 
-        # variable zum speichern des zuletzt fokussierten eingabefelds
+        # Variable für das zuletzt fokussierte Eingabefeld
         self.last_focused_edit = None
 
-        # verbinden signale eingabe-modul mit entsprechenden methoden
+        # Signale verbinden
         self.input_module.number_pressed.connect(self.update_input_line)
         self.input_module.sign_pressed.connect(self.handle_signal)
 
-    def find_last_selected_text_edit(self):
-        # ermittelt zuletzt fokussiertes eingabefeld und speichert es
-        if QApplication.focusWidget() == self.tb_credit_amount:
-            self.last_focused_edit = self.tb_credit_amount
-        if QApplication.focusWidget() == self.tb_interest_rate:
-            self.last_focused_edit = self.tb_interest_rate
-        if QApplication.focusWidget() == self.tb_term:
-            self.last_focused_edit = self.tb_term
+    def eventFilter(self, obj: QObject, event: QEvent):
+        """ Event-Filter, um das zuletzt fokussierte Textfeld zu speichern """
+        if event.type() == QEvent.Type.FocusIn:
+            if obj in (self.tb_credit_amount, self.tb_interest_rate, self.tb_term):
+                self.last_focused_edit = obj
+        return super().eventFilter(obj, event)
 
     def update_input_line(self, value):
-        # aktualisiert das aktuell fokussierte eingabefeld mit gedrückter zahl
-        text = self.last_focused_edit.toPlainText()
-        self.last_focused_edit.setPlainText(text + value)
+        """ Fügt eine gedrückte Zahl zum aktuell fokussierten Eingabefeld hinzu """
+        if self.last_focused_edit:
+            text = self.last_focused_edit.toPlainText()
+            self.last_focused_edit.setPlainText(text + value)
 
     def handle_signal(self, value):
-        # verarbeitet das drücken von sondertasten (= für berechnung / C für zurücksetzen)
+        """ Behandelt Sonderzeichen-Tasten (= für Berechnung, C für Reset) """
         if value == "=":
             self.calculate_credit()
         elif value == "C":
@@ -55,33 +68,36 @@ class CreditCalculation(QWidget):
             self.la_total_interest.setText("")
 
     def calculate_credit(self):
-        # führt kreditberechnung durch und zeigt ergebnisse an
+        """ Führt die Kreditberechnung durch und zeigt die Ergebnisse an """
         credit_amount = self.tb_credit_amount.toPlainText()
         interest_rate = self.tb_interest_rate.toPlainText()
         term = self.tb_term.toPlainText()
 
-        # überprüfung ob alle felder ausgefüllt sind
+        # Überprüfung, ob alle Felder ausgefüllt sind
         if not credit_amount or not interest_rate or not term:
-            print("Bitte alle Werte eingeben.")
+            QMessageBox.warning(self, "Fehlende Eingabe", "Bitte alle Werte eingeben.")
             return
 
         try:
-            # konvertiere eingaben in die richtigen datentypen
+            # Konvertiere Eingaben in numerische Werte
             credit_amount = float(credit_amount)
             interest_rate = float(interest_rate)
             term = int(term)
         except ValueError:
-            print("Ungültige Eingabe.")
+            QMessageBox.critical(self, "Fehlerhafte Eingabe", "Bitte gültige Zahlen eingeben.")
             return
 
-        # berechnung der kreditraten und gesamtkosten
+        # Berechnung Kreditraten und Gesamtkosten
         monthly_rate, total_cost, total_interest = calculate_credit(credit_amount, interest_rate, term)
 
-        # ergebnisse in den entsprechenden labels anzeigen
+        # Ergebnisse in Labels anzeigen
         self.la_monthly_rate.setText(f"{monthly_rate:.2f} €")
         self.la_total_cost.setText(f"{total_cost:.2f} €")
         self.la_total_interest.setText(f"{total_interest:.2f} €")
 
-        # speichert berechnung in history des hauptfensters
-        self.parent.appendHistory(f"Kreditberechnung: {credit_amount}€ | {interest_rate}% | {term} Monate")
+        # Speichert Berechnung in History des Hauptfensters
+        if self.parent:
+            self.parent.appendHistory(f"Kreditberechnung: {credit_amount}€ | {interest_rate}% | {term} Monate")
+
+
 
