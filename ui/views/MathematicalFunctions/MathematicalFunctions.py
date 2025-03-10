@@ -65,6 +65,13 @@ class MathematicalFunctions(QWidget):
             and self.last_focused_edit.toPlainText().find("^") == -1
         ):
             self.update_input_line(value)
+        if (
+            value == ","
+            and self.combox_function_select.currentIndex() != 1
+            and self.combox_function_select.currentIndex() != 4
+            and self.combox_function_select.currentIndex() != 5
+        ):
+            self.update_input_line(".")
 
     def handle_input_on_function_select(self):
         index = self.combox_function_select.currentIndex()
@@ -80,7 +87,7 @@ class MathematicalFunctions(QWidget):
             self.tb_first_input.setVisible(True)
             self.tb_second_input.setVisible(False)
         elif index == 3:
-            self.la_first_input.setText("Power function")
+            self.la_first_input.setText("Exponentialfunktion")
             self.la_second_input.setText("")
             self.tb_first_input.setVisible(True)
             self.tb_second_input.setVisible(False)
@@ -122,7 +129,7 @@ class MathematicalFunctions(QWidget):
             elif re.search('^-.*$', first_value):
                 print("Don't use negative values")
                 return
-            result = calculate_square_root(int(first_value))
+            result = calculate_square_root(float(first_value))
         elif index == 3:
             result = power_function(first_value)
         elif index == 4:

@@ -30,16 +30,18 @@ class Percent(QWidget):
     def find_last_selected_text_edit(self):
         if self.combox_branch_function_select.currentIndex() != 0:
             if QApplication.focusWidget() == self.tb_first_input:
+                print("first")
                 self.last_focused_edit = self.tb_first_input
             if QApplication.focusWidget() == self.tb_second_input:
+                print("second")
                 self.last_focused_edit = self.tb_second_input
         else:
             return
 
     def update_input_line(self, value):
         if self.combox_branch_function_select.currentIndex() != 0 and self.last_focused_edit:
-            text = self.last_focused_edit.toPlainText()
-            self.last_focused_edit.setPlainText(text + value)
+            text = self.last_focused_edit.text()
+            self.last_focused_edit.setText(text + value)
         else:
             return
 
@@ -47,10 +49,10 @@ class Percent(QWidget):
         if value == "=":
             self.handle_result_on_signal()
         if value == "C":
-            self.tb_first_input.setPlainText("")
-            self.tb_second_input.setPlainText("")
+            self.tb_first_input.setText("")
+            self.tb_second_input.setText("")
             self.la_result_output.setText("")
-        if value == "," and self.last_focused_edit.toPlainText().find(".") == -1:
+        if value == "," and self.last_focused_edit.text().find(".") == -1:
             self.update_input_line(".")
 
     def handle_labels_on_select_change(self):
@@ -81,11 +83,14 @@ class Percent(QWidget):
             self.tb_first_input.setVisible(False)
             self.tb_second_input.setVisible(False)
 
+        self.tb_first_input.clear()
+        self.tb_second_input.clear()
+
     def handle_result_on_signal(self):
         result = ''
         index = self.combox_branch_function_select.currentIndex()
-        first_value = self.tb_first_input.toPlainText()
-        second_value = self.tb_second_input.toPlainText()
+        first_value = self.tb_first_input.text()
+        second_value = self.tb_second_input.text()
 
         if re.search('^-.*$', second_value):
             print("Don't use negative percentages")
