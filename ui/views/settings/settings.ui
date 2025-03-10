@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>settings</class>
+ <widget class="QMainWindow" name="settings">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>339</width>
+    <height>393</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QTextEdit" name="secretKeySelect">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>250</y>
+      <width>201</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="historySelect">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>190</y>
+      <width>201</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="html">
+     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+hr { height: 1px; border-width: 0; }
+li.unchecked::marker { content: &quot;\2610&quot;; }
+li.checked::marker { content: &quot;\2612&quot;; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;history.txt&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>57</width>
+      <height>14</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Font</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="fontSelect">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>10</y>
+      <width>201</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>arial</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QComboBox" name="fontSizeSelect">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>70</y>
+      <width>201</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>Medium</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Small</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Large</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>80</y>
+      <width>57</width>
+      <height>14</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Font Size</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="themeSelect">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>130</y>
+      <width>201</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>Light</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Dark</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>140</y>
+      <width>57</width>
+      <height>14</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Theme</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>200</y>
+      <width>81</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>History Path</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>260</y>
+      <width>81</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Secret Key</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>310</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Cancel</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>310</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Apply</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>339</width>
+     <height>19</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>settings</receiver>
+   <slot>apply_changes()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>45</x>
+     <y>341</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>44</x>
+     <y>369</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>settings</receiver>
+   <slot>discard_changes()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>223</x>
+     <y>351</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>219</x>
+     <y>370</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>fontSelect</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>settings</receiver>
+   <slot>change_font()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>150</x>
+     <y>54</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>144</x>
+     <y>62</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>fontSizeSelect</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>settings</receiver>
+   <slot>change_font_size()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>237</x>
+     <y>111</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>237</x>
+     <y>123</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>themeSelect</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>settings</receiver>
+   <slot>change_theme()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>277</x>
+     <y>168</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>256</x>
+     <y>189</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>historySelect</sender>
+   <signal>textChanged()</signal>
+   <receiver>settings</receiver>
+   <slot>change_history_path()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>290</x>
+     <y>234</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>290</x>
+     <y>248</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>secretKeySelect</sender>
+   <signal>textChanged()</signal>
+   <receiver>settings</receiver>
+   <slot>change_key()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>158</x>
+     <y>295</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>319</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>apply_changes()</slot>
+  <slot>discard_changes()</slot>
+  <slot>change_font()</slot>
+  <slot>change_font_size()</slot>
+  <slot>change_theme()</slot>
+  <slot>change_history_path()</slot>
+  <slot>change_key()</slot>
+ </slots>
+</ui>
