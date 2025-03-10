@@ -1,4 +1,4 @@
-import os
+import datetime
 
 from PyQt6 import QtWidgets, uic
 from PyQt6.QtWidgets import (
@@ -9,14 +9,16 @@ from PyQt6.QtWidgets import (
     QVBoxLayout,
 )
 
+import src.settings
+
 # Import Source
 from src.history import decrypt_file, encrypt_file
 from ui.views.BasicModule import BasicModule
-import src.settings
 
 # Import your view modules
 from ui.views.geometry import Geometry
 from ui.views.percent import Percent
+from ui.views.school import School
 from ui.views.settings import Settings
 from ui.views.startScreen import StartScreen
 
@@ -24,9 +26,11 @@ from ui.views.startScreen import StartScreen
 class MainWindow(QMainWindow):
     history = []
 
-    def __init__(self):
+    def __init__(self, app):
         super(MainWindow, self).__init__()
-        uic.loadUi("ui/main_window.ui", self)
+        self.ui = uic.loadUi("ui/main_window.ui", self)
+
+        self.app = app
 
         self.menu_frame = self.findChild(QFrame, "menuFrame")
         self.stacked_widget = self.findChild(QStackedWidget, "modules")
@@ -44,6 +48,7 @@ class MainWindow(QMainWindow):
             {"name": "Geometry", "widget": Geometry()},
             {"name": "Percent", "widget": Percent(self)},
             {"name": "Basic Module", "widget": BasicModule(self)},
+            {"name": "School", "widget": School(self)},
         ]
 
         self.view_mapping = {}
@@ -91,10 +96,10 @@ class MainWindow(QMainWindow):
     def loadSettings(self):
         try:
             config = src.settings.load_config("settings.json")
-            return Settings(config)
+            return Settings(app=self.app, fileSettings=config)
 
         except ValueError:
-            return Settings()
+            return Settings(app=self.app)
 
     def ensure_connection(self):
         """Method for ensuring connections if needed."""
@@ -111,7 +116,8 @@ class MainWindow(QMainWindow):
         self.start_screen.update_history(self.history)  # Update history in start screen
 
     def appendHistory(self, expression):
-        self.history.append(expression)
+        expr = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + ": " + expression
+        self.history.append(expr)
         self.start_screen.update_history(self.history)  # Update history in start screen
 
     def finalizeHistory(self):
@@ -125,13 +131,7 @@ class MainWindow(QMainWindow):
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
-
-    # Load and apply the QSS stylesheet
-    with open("styles.qss", "r") as file:
-        qss = file.read()
-        app.setStyleSheet(qss)
-
-    window = MainWindow()
+    window = MainWindow(app=app)
     window.show()
     app.exec()
     window.finalizeHistory()
