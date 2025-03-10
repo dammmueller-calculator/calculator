@@ -1,6 +1,7 @@
 from PyQt6 import uic
-from PyQt6.QtWidgets import QVBoxLayout, QWidget
 from PyQt6.QtCore import pyqtSignal
+from PyQt6.QtWidgets import QVBoxLayout, QWidget
+
 
 from ui.views.InputModule import InputModule
 
@@ -34,6 +35,11 @@ class SideCalc(QWidget):
     def update_inputLine(self, value):
         if value == "=":
             return
+
+        if value == "C":
+            self.inputLine.setText("")
+            return
+
         text = self.inputLine.text()
         self.inputLine.setText(text + value)
 
@@ -41,7 +47,8 @@ class SideCalc(QWidget):
         self.result = value
         self.parent.appendHistory(self.inputLine.text() + " = " + value)
         self.inputLine.setText(value)
-        
+
+
         self.side_calc_done.emit(self.result)
 
     def show_error(self, value):

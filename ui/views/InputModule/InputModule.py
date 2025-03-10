@@ -114,9 +114,7 @@ class InputModule(QWidget):
             case ",":
                 self.btn_comma.setVisible(False)
             case "C":
-                self.btn_clear.setVisible(False)
-            case "=":
-                self.btn_equal.setVisible(False)
+                self.btn_c.setVisible(False)
             case _:
                 raise ValueError
 
