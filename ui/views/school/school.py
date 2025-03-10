@@ -3,6 +3,7 @@ from PyQt6.QtWidgets import QWidget, QVBoxLayout
 from PyQt6.QtCore import pyqtSignal
 
 from ui.views.InputModule import InputModule
+from ui.views.side_calc import SideCalc
 
 class School(QWidget):    
     number_pressed = pyqtSignal(str)  
@@ -22,6 +23,10 @@ class School(QWidget):
 
         self.input_module.number_pressed.connect(self.setText)
         self.input_module.sign_pressed.connect(self.setText)
+
+        self.side_calc = SideCalc(parent=parent)
+
+        self.side_calc.side_calc_done.connect(self.side_calculate)
 
     def setText(self, text):
         if text == '=':
@@ -83,4 +88,12 @@ class School(QWidget):
         else:
             return "Ungültiger Durchschnitt"
         
-    
+    def doSideCalc(self):
+        self.side_calc.show()
+
+    def side_calculate(self, value):
+        oldText = self.inputString.text()
+        newText = oldText + value
+
+        self.inputString.setText(newText)
+
