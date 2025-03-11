@@ -20,6 +20,10 @@ from ui.views.settings.settings import (
 )  # Adjust this if your settings view is named differently
 
 
+# Hardcoded embedded config (will be replaced at build time)
+EMBEDDED_CONFIG = None  # This will be replaced
+
+
 class MainWindow(QMainWindow):
     def __init__(self, app):
         super(MainWindow, self).__init__()
@@ -73,26 +77,21 @@ class MainWindow(QMainWindow):
         return mandatory
 
     def load_dynamic_views(self, config_path):
-        """
-        Load additional views from config.json.
-        The config.json should have entries with a display name and a class name.
-        For example:
-        {
-          "views": [
-            { "name": "Geometry", "class": "Geometry" },
-            { "name": "Percent", "class": "Percent" },
-            { "name": "School", "class": "School" },
-            { "name": "Math", "class": "MathematicalFunctions" },
-            { "name": "Informatik", "class": "Informatik" }
-          ]
-        }
-        """
+        """Load additional views using the embedded config if available, otherwise load from `config.json`."""
         dynamic_views = []
-        try:
-            with open(config_path, "r") as file:
-                config = json.load(file)
-        except Exception as e:
-            print(f"Failed to load config: {e}")
+        config = None
+
+        if EMBEDDED_CONFIG:
+            print("Using embedded config")
+            config = EMBEDDED_CONFIG
+        else:
+            try:
+                with open(config_path, "r") as file:
+                    config = json.load(file)
+            except Exception as e:
+                print(f"Failed to load config from {config_path}: {e}")
+
+        if not config:
             return dynamic_views
 
         for view_data in config.get("views", []):
@@ -105,6 +104,7 @@ class MainWindow(QMainWindow):
                 dynamic_views.append({"name": display_name, "widget": view_instance})
             else:
                 print(f"Failed to load view for class {class_name}")
+
         return dynamic_views
 
     def load_view_class(self, class_name):
