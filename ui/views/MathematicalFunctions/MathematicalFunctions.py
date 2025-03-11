@@ -129,9 +129,14 @@ class MathematicalFunctions(QWidget):
             elif re.search('^-.*$', first_value):
                 print("Don't use negative values")
                 return
-            result = calculate_square_root(float(first_value))
+            elif re.search('^[^.]*(.[^.]*)?$', first_value):
+                result = calculate_square_root(float(first_value))
         elif index == 3:
-            result = power_function(first_value)
+            if (
+                re.search('^[^.]*(.[^.]*)?$', first_value.split("^")[0])
+                and re.search('^[^.]*(.[^.]*)?$', first_value.split("^")[1])
+            ):
+                result = power_function(first_value)
         elif index == 4:
             if not first_value or not second_value:
                 print("Enter all values")
