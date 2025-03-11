@@ -5,7 +5,7 @@ from PyQt6.QtWidgets import QMainWindow
 
 
 class Settings(QMainWindow):
-    settngs_changed = pyqtSignal()
+    settings_changed = pyqtSignal()
     history_export = pyqtSignal()
 
     settings = {
@@ -38,7 +38,7 @@ class Settings(QMainWindow):
         "small": 10,
         "medium": 15,
         "large": 20,
-        }
+    }
 
     def __init__(self, app, fileSettings=None):
         super().__init__()
@@ -57,7 +57,6 @@ class Settings(QMainWindow):
 
         self.update_ui_from_settings()
 
-
     def apply_changes(self):
         self.settings = self.settings_cache.copy()
 
@@ -68,7 +67,7 @@ class Settings(QMainWindow):
         # Apply theme settings
         self.apply_theme(self.settings["theme"])
 
-        self.settngs_changed.emit()
+        self.settings_changed.emit()
         self.close()
 
     def revert_settings(self):
@@ -130,10 +129,10 @@ class Settings(QMainWindow):
     def export_history(self):
         self.history_export.emit()
 
-
     def apply_theme(self, theme):
         if theme == "dark":
-            self.app.setStyleSheet("""
+            self.app.setStyleSheet(
+                """
                 QWidget {
                     background-color: #2E2E2E;
                     color: white;
@@ -147,9 +146,11 @@ class Settings(QMainWindow):
                 QPushButton:hover {
                     background-color: #777;
                 }
-            """)
+            """
+            )
         else:  # Default to light theme
-            self.app.setStyleSheet("""
+            self.app.setStyleSheet(
+                """
                 QWidget {
                     background-color: white;
                     color: black;
@@ -163,4 +164,5 @@ class Settings(QMainWindow):
                 QPushButton:hover {
                     background-color: #BBB;
                 }
-            """)
+            """
+            )
