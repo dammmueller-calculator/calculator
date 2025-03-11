@@ -17,9 +17,9 @@
    <widget class="QStackedWidget" name="modules">
     <property name="geometry">
      <rect>
-      <x>89</x>
+      <x>119</x>
       <y>9</y>
-      <width>721</width>
+      <width>691</width>
       <height>581</height>
      </rect>
     </property>
@@ -70,7 +70,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>80</width>
+      <width>101</width>
       <height>22</height>
      </rect>
     </property>
@@ -83,7 +83,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
      <rect>
       <x>9</x>
       <y>39</y>
-      <width>81</width>
+      <width>111</width>
       <height>551</height>
      </rect>
     </property>

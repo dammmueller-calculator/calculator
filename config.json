@@ -1,0 +1,9 @@
+{
+  "views": [
+    { "name": "Geometry", "class": "Geometry" },
+    { "name": "Percent", "class": "Percent" },
+    { "name": "School", "class": "School" },
+    { "name": "Math", "class": "MathematicalFunctions" },
+    { "name": "Informatik", "class": "Informatik" }
+  ]
+}
