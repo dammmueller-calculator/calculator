@@ -54,7 +54,7 @@ class MainWindow(QMainWindow):
             {"name": "Basic Module", "widget": BasicModule(self)},
             {"name": "School", "widget": School(self)},
             {"name": "Mathematical Functions", "widget": MathematicalFunctions(self)},
-            {"name": "Informatik", "widget": Informatik(self)}
+            {"name": "Informatik", "widget": Informatik(self)},
         ]
 
         self.view_mapping = {}
@@ -70,7 +70,7 @@ class MainWindow(QMainWindow):
         self.ensure_connection()
 
         self.settings_window = self.loadSettings()
-        self.settings_window.settngs_changed.connect(self.apply_settings)
+        self.settings_window.settings_changed.connect(self.apply_settings)
         self.settings = self.settings_window.get_settings()
         self.showHistory()
 
@@ -133,6 +133,7 @@ class MainWindow(QMainWindow):
         output = decrypt_file(self.settings["history_path"], self.settings["key"])
         with open("history_out.txt", "w") as file:
             file.write("\n".join(output))
+
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
