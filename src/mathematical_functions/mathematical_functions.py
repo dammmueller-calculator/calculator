@@ -9,27 +9,21 @@ def calculate_faculty(faculty: int):
         result = result * counter
         counter = counter - 1
         i = i + 1
-        print(i)
 
     return f"{faculty}! = {result}", history
 
 
-def calculate_square_root(radical: int):
+def calculate_square_root(radical: float):
     square_root = radical ** .5
     return str(square_root), f"Square root of {radical}: {square_root}"
 
 
 def power_function(func: str):
-    power = int(func.split("^")[1])
-    base = int(func.split("^")[0])
-    result = base
-    result_str = f"{func} = {base} "
+    power = float(func.split("^")[1])
+    base = float(func.split("^")[0])
+    result = base ** power
 
-    for i in range(power - 1):
-        result = result * base
-        result_str += f"* {base}"
-
-    return str(result), f"{result_str} = {result}"
+    return str(result), f"{func} = {result}"
 
 
 def find_prime_numbers(lower_limit: int, upper_limit: int):
@@ -56,5 +50,7 @@ def find_prime_numbers(lower_limit: int, upper_limit: int):
 
 def convert_fraction(fraction: str):
     split_string = fraction.split("/")
+    if split_string[1] == "0":
+        return "n.A.", f"{fraction}, division by 0 not possible."
     result = int(split_string[0]) / int(split_string[1])
     return str(result), f"{fraction} = {result}"

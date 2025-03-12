@@ -53,10 +53,25 @@ class MathematicalFunctions(QWidget):
             self.tb_first_input.setPlainText("")
             self.tb_second_input.setPlainText("")
             self.la_result_output.setText("")
-        if self.combox_function_select.currentIndex() == 5 and value == "/":
+        if (
+            self.combox_function_select.currentIndex() == 5
+            and value == "/"
+            and self.last_focused_edit.toPlainText().find("/") == -1
+        ):
             self.update_input_line(value)
-        if self.combox_function_select.currentIndex() == 3 and value == "^":
+        if (
+            self.combox_function_select.currentIndex() == 3
+            and value == "^"
+            and self.last_focused_edit.toPlainText().find("^") == -1
+        ):
             self.update_input_line(value)
+        if (
+            value == ","
+            and self.combox_function_select.currentIndex() != 1
+            and self.combox_function_select.currentIndex() != 4
+            and self.combox_function_select.currentIndex() != 5
+        ):
+            self.update_input_line(".")
 
     def handle_input_on_function_select(self):
         index = self.combox_function_select.currentIndex()
@@ -72,7 +87,7 @@ class MathematicalFunctions(QWidget):
             self.tb_first_input.setVisible(True)
             self.tb_second_input.setVisible(False)
         elif index == 3:
-            self.la_first_input.setText("Power function")
+            self.la_first_input.setText("Exponentialfunktion")
             self.la_second_input.setText("")
             self.tb_first_input.setVisible(True)
             self.tb_second_input.setVisible(False)
@@ -114,9 +129,14 @@ class MathematicalFunctions(QWidget):
             elif re.search('^-.*$', first_value):
                 print("Don't use negative values")
                 return
-            result = calculate_square_root(int(first_value))
+            elif re.search('^[^.]*(.[^.]*)?$', first_value):
+                result = calculate_square_root(float(first_value))
         elif index == 3:
-            result = power_function(first_value)
+            if (
+                re.search('^[^.]*(.[^.]*)?$', first_value.split("^")[0])
+                and re.search('^[^.]*(.[^.]*)?$', first_value.split("^")[1])
+            ):
+                result = power_function(first_value)
         elif index == 4:
             if not first_value or not second_value:
                 print("Enter all values")
