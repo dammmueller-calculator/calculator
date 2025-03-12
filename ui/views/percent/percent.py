@@ -47,8 +47,8 @@ class Percent(QWidget):
         if value == "=":
             self.handle_result_on_signal()
         if value == "C":
-            self.tb_first_input.setText("")
-            self.tb_second_input.setText("")
+            self.tb_first_input.setPlainText("")
+            self.tb_second_input.setPlainText("")
             self.la_result_output.setText("")
         if value == "," and self.last_focused_edit.toPlainText().find(".") == -1:
             self.update_input_line(".")
